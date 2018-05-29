@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Ненахов](https://up.htmlacademy.ru/javascript/14/user/224129).
-* Наставник: `Неизвестно`.
+* Наставник: [Анна Тюрина](https://htmlacademy.ru/profile/anntv).
 
 ---
 
