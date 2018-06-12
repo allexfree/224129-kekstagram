@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Объявление переменных
 
@@ -29,7 +29,7 @@ var getRandomArrayIndex = function (array) {
 
 /* Ф-ция showElements показывает элементы блоков, у которых проставлен class="hidden" */
 var showElements = function () {
- document.querySelector('.big-picture').classList.remove('hidden');
+  document.querySelector('.big-picture').classList.remove('hidden');
 };
 
 /* Ф-ция hideElements визуально прячет элементы блоков, добавляя им class="visually-hidden"*/
@@ -38,7 +38,7 @@ var hideElements = function () {
   for (var i = 0; i < visibleElement.length; i++) {
     visibleElement[i].classList.add('visually-hidden');
   }
-}
+};
 
 /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива userPhotos */
 var fillBlockPicturesElements = function (element) {
@@ -55,7 +55,7 @@ var fillBlockBigPictureElements = function () {
   document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, 6) + '.svg';
   document.querySelector('.social__text').textContent = getRandomArrayIndex(comments);
   document.querySelector('.social__caption').textContent = getRandomArrayIndex(description);
-}
+};
 
 /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
 var addElements = function (element) {
@@ -71,7 +71,7 @@ for (var i = 0; i < 25; i++) {
   userPhotos.push({url: 'photos/' + url[i], likes: getRandomMinMax(15, 200), comments: comments[getRandomMinMax(0, 5)], description: description[getRandomMinMax(0, 5)]}); // формирование массива userPhotos
 }
 
-for (var i = 0; i < userPhotos.length; i++) {
+for (i = 0; i < userPhotos.length; i++) {
   var clone = photoTemplate.cloneNode(true);
   addElements(clone);
   fillBlockPicturesElements(clone);
