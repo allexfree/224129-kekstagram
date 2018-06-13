@@ -30,12 +30,12 @@ var getRandomArrayIndex = function (array) {
 
 /* Ф-ция showAndHideElements показывает и скрывает элементы блоков.
   Параметры:
-    invisibleElement - элемент, который нужно показать;
-    visibleElement - элемент, который нужно спрятать. */
-var showAndHideElements = function (invisibleElement, visibleElement) {
-  invisibleElement.classList.remove('hidden');
-  for (var i = 0; i < visibleElement.length; i++) {
-    visibleElement[i].classList.add('visually-hidden');
+    elementInvisible - элемент, который нужно показать;
+    elementVisible - элемент, который нужно спрятать. */
+var showAndHideElements = function (elementInvisible, elementVisible) {
+  elementInvisible.classList.remove('hidden');
+  for (var i = 0; i < elementVisible.length; i++) {
+    elementVisible[i].classList.add('visually-hidden');
   }
 };
 
