@@ -2,6 +2,8 @@
 
 // Объявление переменных
 
+var PICTURES_QUANTITY = 25;
+var SVG_QUANTITY = 6;
 var userPhotos = [];
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
@@ -23,8 +25,8 @@ var getRandomMinMax = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-/* Ф-ция getRandomArrayIndex получает случайный индекс элемента массива, указанного в парметре array */
-var getRandomArrayIndex = function (array) {
+/* Ф-ция getRandomArrayElement получает случайный элемент массива, указанного в парметре array */
+var getRandomArrayElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
@@ -47,13 +49,13 @@ var fillBlockPicturesElements = function (element) {
 };
 
 /* Ф-ция fillBlockBigPictureElements выполняет заполнение элементов блока .big-picture */
-var fillBlockBigPictureElements = function () {
-  blockBigPicture.querySelector('img').src = 'photos/' + getRandomMinMax(1, 25) + '.jpg';
-  document.querySelector('.likes-count').textContent = userPhotos[i].likes;
-  document.querySelector('.comments-count').textContent = userPhotos[i].comments;
-  document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, 6) + '.svg';
-  document.querySelector('.social__text').textContent = getRandomArrayIndex(comments);
-  document.querySelector('.social__caption').textContent = getRandomArrayIndex(description);
+var fillBlockBigPictureElements = function (array) {
+  blockBigPicture.querySelector('img').src = 'photos/' + getRandomMinMax(1, PICTURES_QUANTITY) + '.jpg';
+  document.querySelector('.likes-count').textContent = array.likes;
+  document.querySelector('.comments-count').textContent = array.comments;
+  document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+  document.querySelector('.social__text').textContent = getRandomArrayElement(comments);
+  document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
 };
 
 /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
@@ -67,14 +69,14 @@ var addElements = function (element) {
 // вызов ф-ций
 
 for (var i = 1; i <= 25; i++) {
-  userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: comments[getRandomMinMax(0, 5)], description: description[getRandomMinMax(0, 5)]}); // формирование массива userPhotos
+  userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomArrayElement(comments), description: getRandomArrayElement(description)}); // формирование массива userPhotos
 }
 
 for (i = 0; i < userPhotos.length; i++) {
   var clone = photoTemplate.cloneNode(true);
   addElements(clone);
   fillBlockPicturesElements(clone);
-  fillBlockBigPictureElements();
+  fillBlockBigPictureElements(userPhotos);
 }
 
 showAndHideElements(blockBigPicture, visibleElement);
