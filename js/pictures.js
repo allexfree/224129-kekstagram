@@ -71,7 +71,7 @@ var addElements = function (element) {
 for (var i = 1; i <= PICTURES_QUANTITY; i++) {
   userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomArrayElement(comments), description: getRandomArrayElement(description)}); // формирование массива userPhotos
   clone = photoTemplate.cloneNode(true);
-  fillBlockPicturesElements(clone, userPhotos[i-1]);
+  fillBlockPicturesElements(clone, userPhotos[i - 1]);
   addElements(clone);
 }
 
