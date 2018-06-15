@@ -12,7 +12,9 @@ var description = ['Тестим новую камеру!', 'Затусили с
 
 
 // Вершины
+var fragment = document.createDocumentFragment();
 var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
+var clone;
 var listElement = document.querySelector('.pictures');
 var blockBigPicture = document.querySelector('.big-picture');
 var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
@@ -41,18 +43,18 @@ var showAndHideElements = function (elementInvisible, elementVisible) {
   }
 };
 
-/* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива userPhotos */
-var fillBlockPicturesElements = function (element) {
-  element.querySelector('.picture__img').src = userPhotos[i].url;
-  element.querySelector('.picture__stat--comments').textContent = userPhotos[i].comments;
-  element.querySelector('.picture__stat--likes').textContent = userPhotos[i].likes;
+/* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
+var fillBlockPicturesElements = function (element, array) {
+  element.querySelector('.picture__img').src = array[i].url;
+  element.querySelector('.picture__stat--comments').textContent = array[i].comments;
+  element.querySelector('.picture__stat--likes').textContent = array[i].likes;
 };
 
 /* Ф-ция fillBlockBigPictureElements выполняет заполнение элементов блока .big-picture */
-var fillBlockBigPictureElements = function (array) {
+var fillBlockBigPictureElements = function (element) {
   blockBigPicture.querySelector('img').src = 'photos/' + getRandomMinMax(1, PICTURES_QUANTITY) + '.jpg';
-  document.querySelector('.likes-count').textContent = array.likes;
-  document.querySelector('.comments-count').textContent = array.comments;
+  document.querySelector('.likes-count').textContent = element.likes;
+  document.querySelector('.comments-count').textContent = element.comments;
   document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
   document.querySelector('.social__text').textContent = getRandomArrayElement(comments);
   document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
@@ -60,23 +62,24 @@ var fillBlockBigPictureElements = function (array) {
 
 /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
 var addElements = function (element) {
-  var fragment = document.createDocumentFragment();
   fragment.appendChild(element);
-  listElement.appendChild(fragment);
 };
 
 
 // вызов ф-ций
 
-for (var i = 1; i <= 25; i++) {
+for (var i = i + 1; i <= PICTURES_QUANTITY; i++) {
   userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomArrayElement(comments), description: getRandomArrayElement(description)}); // формирование массива userPhotos
 }
 
 for (i = 0; i < userPhotos.length; i++) {
-  var clone = photoTemplate.cloneNode(true);
+  clone = photoTemplate.cloneNode(true);
+  fillBlockPicturesElements(clone, userPhotos);
   addElements(clone);
-  fillBlockPicturesElements(clone);
-  fillBlockBigPictureElements(userPhotos);
 }
+
+listElement.appendChild(fragment);
+
+fillBlockBigPictureElements(userPhotos[0]);
 
 showAndHideElements(blockBigPicture, visibleElement);
