@@ -44,10 +44,10 @@ var showAndHideElements = function (elementInvisible, elementVisible) {
 };
 
 /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
-var fillBlockPicturesElements = function (element, array) {
-  element.querySelector('.picture__img').src = array[i].url;
-  element.querySelector('.picture__stat--comments').textContent = array[i].comments;
-  element.querySelector('.picture__stat--likes').textContent = array[i].likes;
+var fillBlockPicturesElements = function (element, sourceitem) {
+  element.querySelector('.picture__img').src = sourceitem.url;
+  element.querySelector('.picture__stat--comments').textContent = sourceitem.comments;
+  element.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
 };
 
 /* Ф-ция fillBlockBigPictureElements выполняет заполнение элементов блока .big-picture */
@@ -68,13 +68,10 @@ var addElements = function (element) {
 
 // вызов ф-ций
 
-for (var i = i + 1; i <= PICTURES_QUANTITY; i++) {
+for (var i = 1; i <= PICTURES_QUANTITY; i++) {
   userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomArrayElement(comments), description: getRandomArrayElement(description)}); // формирование массива userPhotos
-}
-
-for (i = 0; i < userPhotos.length; i++) {
   clone = photoTemplate.cloneNode(true);
-  fillBlockPicturesElements(clone, userPhotos);
+  fillBlockPicturesElements(clone, userPhotos[i-1]);
   addElements(clone);
 }
 
