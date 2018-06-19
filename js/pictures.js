@@ -18,7 +18,12 @@ var clone;
 var listElement = document.querySelector('.pictures');
 var blockBigPicture = document.querySelector('.big-picture');
 var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
-
+var pictureLink = listElement.querySelectorAll('.picture__link');
+var pictureLinkGet = listElement.getElementsByClassName('picture__link');
+//console.log(listElement.children);
+console.log(pictureLink);
+console.log(pictureLinkGet);
+console.log(listElement);
 
 // Определение ф-ций
 
@@ -79,4 +84,4 @@ listElement.appendChild(fragment);
 
 fillBlockBigPictureElements(userPhotos[0]);
 
-showAndHideElements(blockBigPicture, visibleElement);
+//showAndHideElements(blockBigPicture, visibleElement);
