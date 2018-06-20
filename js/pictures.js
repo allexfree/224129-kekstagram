@@ -19,11 +19,6 @@ var listElement = document.querySelector('.pictures');
 var blockBigPicture = document.querySelector('.big-picture');
 var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
 var pictureLink = listElement.querySelectorAll('.picture__link');
-var pictureLinkGet = listElement.getElementsByClassName('picture__link');
-//console.log(listElement.children);
-console.log(pictureLink);
-console.log(pictureLinkGet);
-console.log(listElement);
 
 // Определение ф-ций
 
@@ -48,11 +43,16 @@ var showAndHideElements = function (elementInvisible, elementVisible) {
   }
 };
 
+var photoClickHandler = function () {
+  showAndHideElements(blockBigPicture, visibleElement);
+};
+
 /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
 var fillBlockPicturesElements = function (element, sourceitem) {
   element.querySelector('.picture__img').src = sourceitem.url;
   element.querySelector('.picture__stat--comments').textContent = sourceitem.comments;
   element.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+  element.addEventListener('click', photoClickHandler);
 };
 
 /* Ф-ция fillBlockBigPictureElements выполняет заполнение элементов блока .big-picture */
