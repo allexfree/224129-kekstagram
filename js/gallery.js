@@ -147,7 +147,7 @@
   scalePin.addEventListener('mouseup', changeEffectIntensity);
 
   // Вызов ф-ций
-  for (var i = 0; i < effectSliderItems.length; i++ ) {
+  for (var i = 0; i < effectSliderItems.length; i++) {
     effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
   }
 
