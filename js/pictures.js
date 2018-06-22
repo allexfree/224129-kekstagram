@@ -47,8 +47,8 @@ var photoClickHandler = function (evt) {
   showAndHideElements(blockBigPicture, visibleElement);
   var target = evt.target;
   blockBigPicture.querySelector('img').src = 'photos/' + target.id + '.jpg';
-  document.querySelector('.likes-count').textContent = userPhotos[i].likes;
-  document.querySelector('.comments-count').textContent = userPhotos[i].comments;
+  document.querySelector('.likes-count').textContent = userPhotos.likes;
+  document.querySelector('.comments-count').textContent = userPhotos.comments;
   document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
   document.querySelector('.social__text').textContent = getRandomArrayElement(comments);
   document.querySelector('.social__caption').textContent = getRandomArrayElement(description);

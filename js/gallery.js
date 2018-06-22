@@ -55,13 +55,13 @@
   };
 
   var makeResizeMinus = function () {
-    resize = Math.max(parseInt(resizeControl.value) - scale.step, scale.min);
+    resize = Math.max(parseInt(resizeControl.value, 10) - scale.step, scale.min);
     resizeControl.value = resize + '%';
     return transformImg();
   };
 
   var makeResizePlus = function () {
-    resize = Math.min(parseInt(resizeControl.value) + scale.step, scale.max);
+    resize = Math.min(parseInt(resizeControl.value, 10) + scale.step, scale.max);
     resizeControl.value = resize + '%';
     return transformImg();
   };
@@ -150,4 +150,5 @@
   for (var i = 0; i < effectSliderItems.length; i++ ) {
     effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
   }
+
 })();
