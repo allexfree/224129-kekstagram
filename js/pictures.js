@@ -17,8 +17,7 @@ var photoTemplate = document.querySelector('#picture').content.querySelector('.p
 var clone;
 var listElement = document.querySelector('.pictures');
 var blockBigPicture = document.querySelector('.big-picture');
-var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel')
-var bigImg = blockBigPicture.querySelector('img');
+var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
 var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
 
 // Определение ф-ций
