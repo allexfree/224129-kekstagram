@@ -9,13 +9,6 @@
   var WIDTH_BLOCK_SCALE = 453;
   var scale = {default: 100, min: 25, max: 100, step: 25};
   var resize;
-  var filters = {
-    chrome: {name: 'grayscale', min: 0, max: 1},
-    sepia: {name: 'sepia', min: 0, max: 1},
-    marvin: {name: 'invert', min: 0, max: 100},
-    fobos: {name: 'blur', min: 0, max: 3},
-    znoy: {name: 'brightness', min: 1, max: 3}
-  };
   var effectClassName;
   var startCoordX;
   var shift;
@@ -41,6 +34,8 @@
   var effectSliderItems = document.querySelectorAll('input[type=radio]');
   var effectValue = document.querySelector('input[type=radio]:checked').value;
   // Объявление ф-ций
+
+
 
   var openDialogImg = function () {
     body.classList.add('modal-open');
@@ -103,11 +98,11 @@
     effectClassName = 'effects__preview--' + effectValue;
     imgEditable.className = '';
     imgEditable.classList.add(effectClassName);
+    imgEditable.removeAttribute('style');
   };
 
   var scalePinMousedownHandler = function (evt) {
     evt.preventDefault();
-
     startCoordX = evt.clientX;
 
     var mouseMoveHandler = function (moveEvt) {
@@ -131,14 +126,27 @@
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
+  var changeEffectIntensity = function () {
+    var filters = {
+      chrome: 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')',
+      sepia: 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')',
+      marvin: 'invert(' + Math.round(scaleValue.value) + '%)',
+      phobos: 'blur(' + scaleValue.value * 3 / 100 + 'px)',
+      heat: 'brightness(' + (scaleValue.value * 2 / 100 + 1) + ')'
+    };
+    var currentFilter = effectValue;
+    imgEditable.style.filter = filters[currentFilter];
+  };
+
   // Обработчики событий
   imgUpload.addEventListener('change', openDialogImg);
   imgUploadCancel.addEventListener('click', closeDialogImg);
   document.addEventListener('keydown', dialogImgPressEsc);
   buttonResizeMinus.addEventListener('click', makeResizeMinus);
   buttonResizePlus.addEventListener('click', makeResizePlus);
-  makeChangeEffectHendler();
+  makeChangeEffectHandler();
   scalePin.addEventListener('mousedown', scalePinMousedownHandler);
+  scalePin.addEventListener('mouseup', changeEffectIntensity);
 
   // Вызов ф-ций
   for (i = 0; i < effectSliderItems.length; i++ ) {
