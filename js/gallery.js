@@ -23,7 +23,6 @@
   var imgUploadCancel = uploadImgForm.querySelector('#upload-cancel');
   var imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview');
   var imgEditable = imgUploadPreview.querySelector('img');
-  var imgUploadScale =  document.querySelector('.img-upload__scale');
   var buttonResizeMinus = imgUploadOverlay.querySelector('.resize__control--minus');
   var buttonResizePlus = imgUploadOverlay.querySelector('.resize__control--plus');
   var resizeControl = imgUploadOverlay.querySelector('.resize__control--value');
@@ -36,14 +35,13 @@
   // Объявление ф-ций
 
 
-
   var openDialogImg = function () {
     body.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
     resizeControl.setAttribute('value', scale.default + '%');
   };
 
-  var closeDialogImg = function() {
+  var closeDialogImg = function () {
     body.classList.remove('modal-open');
     imgUploadOverlay.classList.add('hidden');
     resizeControl.setAttribute('value', scale.default + '%');
@@ -113,7 +111,7 @@
 
       position = (scalePin.offsetLeft - shift) * PERCENTAGES / WIDTH_BLOCK_SCALE;
       setPositionPin(position);
-    }
+    };
 
     var mouseUpHandler = function (upEvt) {
       upEvt.preventDefault();
