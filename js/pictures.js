@@ -12,7 +12,7 @@
   ];
 
 
-// Вершины
+  // Вершины
   var fragment = document.createDocumentFragment();
   var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
   var clone;
@@ -21,19 +21,19 @@
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
 
-// Определение ф-ций
+  // Определение ф-ций
 
-/* Ф-ция getRandomMinMax получает случайное число от min до max */
+  /* Ф-ция getRandomMinMax получает случайное число от min до max */
   var getRandomMinMax = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
-/* Ф-ция getRandomArrayElement получает случайный элемент массива, указанного в парметре array */
+  /* Ф-ция getRandomArrayElement получает случайный элемент массива, указанного в парметре array */
   var getRandomArrayElement = function (array) {
     return array[Math.floor(Math.random() * array.length)];
   };
 
-/* Ф-ция showAndHideElements показывает и скрывает элементы блоков.
+  /* Ф-ция showAndHideElements показывает и скрывает элементы блоков.
   Параметры:
     elementInvisible - элемент, который нужно показать;
     elementVisible - элемент, который нужно спрятать. */
@@ -55,7 +55,7 @@
     document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
   };
 
-/* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
+  /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
   var fillBlockPicturesElements = function (element, sourceitem) {
     element.querySelector('.picture__img').src = sourceitem.url;
     element.querySelector('.picture__stat--comments').textContent = sourceitem.comments;
@@ -64,7 +64,7 @@
     element.addEventListener('click', photoClickHandler);
   };
 
-/* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
+  /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
   var addElements = function (element) {
     fragment.appendChild(element);
   };
@@ -79,7 +79,7 @@
     }
   });
 
-// вызов ф-ций
+  // вызов ф-ций
 
   for (var i = 1; i <= PICTURES_QUANTITY; i++) {
     userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomMinMax(15, 200), description: getRandomArrayElement(description), id: i}); // формирование массива userPhotos
