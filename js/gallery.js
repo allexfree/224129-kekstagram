@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   // Объявление переменных
 
   var ESC_KEYCODE = 27;
@@ -13,6 +14,7 @@
   var startCoordX;
   var shift;
   var position;
+
 
   // Вершины
 
@@ -32,8 +34,12 @@
   var sliderEffects = document.querySelector('.img-upload__effects');
   var effectSliderItems = document.querySelectorAll('input[type=radio]');
   var effectValue = document.querySelector('input[type=radio]:checked').value;
-  // Объявление ф-ций
 
+  var hashtagField = imgUploadOverlay.querySelector('.text__hashtags');
+  var commentField = imgUploadOverlay.querySelector('.text__description');
+
+
+  // Объявление ф-ций
 
   var openDialogImg = function () {
     body.classList.add('modal-open');
@@ -46,10 +52,11 @@
     imgUploadOverlay.classList.add('hidden');
     resizeControl.setAttribute('value', scale.default + '%');
     imgUploadPreview.setAttribute('style', 'transform: 1');
+    hashtagField.classList.add('hidden');
   };
 
   var dialogImgPressEsc = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === ESC_KEYCODE && evt.target !== hashtagField && evt.target !== commentField) {
       closeDialogImg();
     }
   };
@@ -150,5 +157,12 @@
   for (var i = 0; i < effectSliderItems.length; i++) {
     effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
   }
+
+
+  window.gallery = {
+    dialogImgPressEsc: dialogImgPressEsc,
+    commentField: imgUploadOverlay.querySelector('.text__description'),
+    hashtagField: imgUploadOverlay.querySelector('.text__hashtags')
+  };
 
 })();

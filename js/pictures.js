@@ -1,5 +1,5 @@
 'use strict';
-
+(function () {
 // Объявление переменных
 
 var PICTURES_QUANTITY = 25;
@@ -88,3 +88,5 @@ for (var i = 1; i <= PICTURES_QUANTITY; i++) {
 }
 
 listElement.appendChild(fragment);
+
+})();
