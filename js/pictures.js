@@ -15,6 +15,7 @@
 
 
   // Вершины
+
   var fragment = document.createDocumentFragment();
   var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
   var clone;
