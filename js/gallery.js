@@ -52,6 +52,7 @@
     imgUploadOverlay.classList.add('hidden');
     resizeControl.setAttribute('value', scale.default + '%');
     imgUploadPreview.setAttribute('style', 'transform: 1');
+    sliderEffects.classList.remove('hidden');
     hashtagField.classList.add('hidden');
   };
 
@@ -97,8 +98,6 @@
     resetEffect();
     if (effectValue === 'none') {
       sliderEffects.classList.add('hidden');
-    } else {
-      sliderEffects.classList.remove('hidden');
     }
     effectClassName = 'effects__preview--' + effectValue;
     imgEditable.className = '';
@@ -132,15 +131,23 @@
   };
 
   var changeEffectIntensity = function () {
-    var filters = {
-      chrome: 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')',
-      sepia: 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')',
-      marvin: 'invert(' + Math.round(scaleValue.value) + '%)',
-      phobos: 'blur(' + scaleValue.value * 3 / 100 + 'px)',
-      heat: 'brightness(' + (scaleValue.value * 2 / 100 + 1) + ')'
-    };
-    var currentFilter = effectValue;
-    imgEditable.style.filter = filters[currentFilter];
+    switch (imgEditable.getAttribute('class')) {
+      case 'effects__preview--heat':
+      imgEditable.style.filter = 'brightness(' + (scaleValue.value * 2 / 100 + 1).toFixed(1) + ')';
+      break;
+      case 'effects__preview--phobos':
+      imgEditable.style.filter = 'blur(' + (scaleValue.value * 3 / 100).toFixed(1) + 'px)';
+      break;
+      case 'effects__preview--marvin':
+      imgEditable.style.filter = 'invert(' + Math.round(scaleValue.value) + '%)';
+      break;
+      case 'effects__preview--sepia':
+      imgEditable.style.filter = 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')';
+      break;
+      case 'effects__preview--chrome':
+      imgEditable.style.filter = 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')';
+      break;
+    }
   };
 
   // Обработчики событий
@@ -149,9 +156,9 @@
   document.addEventListener('keydown', dialogImgPressEsc);
   buttonResizeMinus.addEventListener('click', makeResizeMinus);
   buttonResizePlus.addEventListener('click', makeResizePlus);
-  makeChangeEffectHandler();
   scalePin.addEventListener('mousedown', scalePinMousedownHandler);
   scalePin.addEventListener('mouseup', changeEffectIntensity);
+  makeChangeEffectHandler();
 
   // Вызов ф-ций
   for (var i = 0; i < effectSliderItems.length; i++) {
@@ -161,8 +168,8 @@
 
   window.gallery = {
     dialogImgPressEsc: dialogImgPressEsc,
-    commentField: imgUploadOverlay.querySelector('.text__description'),
-    hashtagField: imgUploadOverlay.querySelector('.text__hashtags')
+    commentField: commentField,
+    hashtagField: hashtagField
   };
 
 })();

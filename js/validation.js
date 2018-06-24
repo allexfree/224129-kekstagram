@@ -4,6 +4,9 @@
   var MAX_LENGTH_COMMENT_FIELD = 140;
 
   var checkHashtags = function (tags) {
+    if (tags.length > 5) {
+      return 'Кол-во хештегов не должно быть больше пяти';
+    }
     for (var i = 0; i < tags.length; i++) {
       if ((tags[i].charAt(0) !== '#') || (tags[i] === '')) {
         return 'Хэштег должен начинаться с символа #';
@@ -22,9 +25,6 @@
           return 'Есть одинаковые хештеги, пожалуйста, исправьте';
         }
       }
-    }
-    if (tags.length > 5) {
-      return 'Кол-во хештегов не должно быть больше пяти';
     }
     return '';
   };
