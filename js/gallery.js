@@ -133,20 +133,20 @@
   var changeEffectIntensity = function () {
     switch (imgEditable.getAttribute('class')) {
       case 'effects__preview--heat':
-      imgEditable.style.filter = 'brightness(' + (scaleValue.value * 2 / 100 + 1).toFixed(1) + ')';
-      break;
+        imgEditable.style.filter = 'brightness(' + (scaleValue.value * 2 / 100 + 1).toFixed(1) + ')';
+        break;
       case 'effects__preview--phobos':
-      imgEditable.style.filter = 'blur(' + (scaleValue.value * 3 / 100).toFixed(1) + 'px)';
-      break;
+        imgEditable.style.filter = 'blur(' + (scaleValue.value * 3 / 100).toFixed(1) + 'px)';
+        break;
       case 'effects__preview--marvin':
-      imgEditable.style.filter = 'invert(' + Math.round(scaleValue.value) + '%)';
-      break;
+        imgEditable.style.filter = 'invert(' + Math.round(scaleValue.value) + '%)';
+        break;
       case 'effects__preview--sepia':
-      imgEditable.style.filter = 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')';
-      break;
+        imgEditable.style.filter = 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')';
+        break;
       case 'effects__preview--chrome':
-      imgEditable.style.filter = 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')';
-      break;
+        imgEditable.style.filter = 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')';
+        break;
     }
   };
 
