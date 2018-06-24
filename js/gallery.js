@@ -2,6 +2,7 @@
 
 (function () {
 
+
   // Объявление переменных
 
   var ESC_KEYCODE = 27;
