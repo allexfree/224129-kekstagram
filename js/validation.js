@@ -1,6 +1,7 @@
 'use strict';
 (function () {
 
+
   var MOUNT_HASHTAG = 5;
   var MIN_SYMBOLS = 3;
   var MAX_SYMBOLS = 20;
