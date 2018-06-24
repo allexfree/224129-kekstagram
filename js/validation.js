@@ -6,8 +6,8 @@
   var MIN_SYMBOLS = 3;
   var MAX_SYMBOLS = 20;
   var MAX_LENGTH_COMMENT_FIELD = 140;
-  var COMMENT_VALID = 'Длина текста не должна превышать 140 символов';
-  var COMMENT_INVALID = '';
+  var COMMENT_INVALID = 'Длина текста не должна превышать 140 символов';
+  var COMMENT_VALID = '';
 
   var checkHashtags = function (tags) {
     if (tags.length > MOUNT_HASHTAG) {
@@ -41,7 +41,7 @@
   };
 
   var commentInputHandler = function () {
-    window.gallery.commentField.setCustomValidity((window.gallery.commentField.value.length > MAX_LENGTH_COMMENT_FIELD) ? COMMENT_VALID : COMMENT_INVALID);
+    window.gallery.commentField.setCustomValidity((window.gallery.commentField.value.length > MAX_LENGTH_COMMENT_FIELD) ? COMMENT_INVALID : COMMENT_VALID);
   };
 
   window.gallery.hashtagField.addEventListener('input', hashtagInputHandler);
