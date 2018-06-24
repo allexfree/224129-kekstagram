@@ -117,6 +117,7 @@
 
       position = (scalePin.offsetLeft - shift) * PERCENTAGES / WIDTH_BLOCK_SCALE;
       setPositionPin(position);
+      changeEffectIntensity();
     };
 
     var mouseUpHandler = function (upEvt) {

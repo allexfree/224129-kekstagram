@@ -5,6 +5,8 @@
 
   var PICTURES_QUANTITY = 25;
   var SVG_QUANTITY = 6;
+  var VALUE_MIN = 15;
+  var VALUE_MAX = 200;
   var userPhotos = [];
   var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
@@ -82,7 +84,7 @@
   // вызов ф-ций
 
   for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-    userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(15, 200), comments: getRandomMinMax(15, 200), description: getRandomArrayElement(description), id: i}); // формирование массива userPhotos
+    userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(VALUE_MIN, VALUE_MAX), comments: getRandomMinMax(VALUE_MIN, VALUE_MAX), description: getRandomArrayElement(description), id: i}); // формирование массива userPhotos
     clone = photoTemplate.cloneNode(true);
     fillBlockPicturesElements(clone, userPhotos[i - 1]);
     addElements(clone);
