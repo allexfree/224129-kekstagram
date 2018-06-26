@@ -35,6 +35,9 @@
   var sliderEffects = document.querySelector('.img-upload__effects');
   var effectSliderItems = document.querySelectorAll('input[type=radio]');
   var effectValue = document.querySelector('input[type=radio]:checked').value;
+  //var effectLevelValue = imgUploadPreview.querySelector('.scale__value');
+  console.log(document.querySelectorAll('input'));
+  console.log(scaleValue.value);
 
   var hashtagField = imgUploadOverlay.querySelector('.text__hashtags');
   var commentField = imgUploadOverlay.querySelector('.text__description');
@@ -162,12 +165,18 @@
   scalePin.addEventListener('mouseup', changeEffectIntensity);
   makeChangeEffectHandler();
 
+  uploadImgForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    window.backend.save(new FormData(uploadImgForm), closeDialogImg, window.backend.windowError);
+  });
+
   // Вызов ф-ций
   for (var i = 0; i < effectSliderItems.length; i++) {
     effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
   }
 
-
+ console.log(scaleValue.value);
   window.gallery = {
     dialogImgPressEsc: dialogImgPressEsc,
     commentField: commentField,
