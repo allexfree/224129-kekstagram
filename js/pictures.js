@@ -37,54 +37,54 @@
   Параметры:
     elementInvisible - элемент, который нужно показать;
     elementVisible - элемент, который нужно спрятать. */
-    var showAndHideElements = function (elementInvisible, elementVisible) {
-      elementInvisible.classList.remove('hidden');
-      for (var i = 0; i < elementVisible.length; i++) {
-        elementVisible[i].classList.add('visually-hidden');
-      }
-    };
+  var showAndHideElements = function (elementInvisible, elementVisible) {
+    elementInvisible.classList.remove('hidden');
+    for (var i = 0; i < elementVisible.length; i++) {
+      elementVisible[i].classList.add('visually-hidden');
+    }
+  };
 
-    var photoClickHandler = function (evt) {
-      showAndHideElements(blockBigPicture, visibleElement);
-      var target = evt.target;
-      blockBigPicture.querySelector('img').src = target.id;
-      document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
-      document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
-      for (var i = 0; i < listSocialComment.length; i++) {
-        listSocialComment[i].classList.add('social__comment--text');
-        listSocialComment[i].querySelector('.social__text').textContent = getRandomArrayElement(comments);
-      }
-    };
+  var photoClickHandler = function (evt) {
+    showAndHideElements(blockBigPicture, visibleElement);
+    var target = evt.target;
+    blockBigPicture.querySelector('img').src = target.id;
+    document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+    document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
+    for (var i = 0; i < listSocialComment.length; i++) {
+      listSocialComment[i].classList.add('social__comment--text');
+      listSocialComment[i].querySelector('.social__text').textContent = getRandomArrayElement(comments);
+    }
+  };
 
-    /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
-    var fillBlockPicturesElements = function (sourceitem) {
-      var photos = photoTemplate.cloneNode(true);
-      photos.querySelector('.picture__img').src = sourceitem.url;
-      photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
-      photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
-      photos.querySelector('.picture__img').setAttribute('id', '' + sourceitem.url);
-      photos.addEventListener('click', photoClickHandler);
-      return photos;
-    };
+  /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
+  var fillBlockPicturesElements = function (sourceitem) {
+    var photos = photoTemplate.cloneNode(true);
+    photos.querySelector('.picture__img').src = sourceitem.url;
+    photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
+    photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+    photos.querySelector('.picture__img').setAttribute('id', '' + sourceitem.url);
+    photos.addEventListener('click', photoClickHandler);
+    return photos;
+  };
 
-    bigPictureCancel.addEventListener('click', function () {
+  bigPictureCancel.addEventListener('click', function () {
+    blockBigPicture.classList.add('hidden');
+  });
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.gallery.ESC_KEYCODE) {
       blockBigPicture.classList.add('hidden');
-    });
-
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.gallery.ESC_KEYCODE) {
-        blockBigPicture.classList.add('hidden');
-      }
-    });
+    }
+  });
 
   // вызов ф-ций
   var getListPhotos = function (photo) {
     for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-      fragment.appendChild(fillBlockPicturesElements(photo[i - 1]))
+      fragment.appendChild(fillBlockPicturesElements(photo[i - 1]));
       listElement.appendChild(fragment);
     }
   };
 
-window.backend.load(getListPhotos, window.backend.windowError);
+  window.backend.load(getListPhotos, window.backend.windowError);
 
 })();

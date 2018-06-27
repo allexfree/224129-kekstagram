@@ -37,7 +37,7 @@
     xhr.send(data);
   };
 
-  var load = function (onLoad, onError, url) {
+  var load = function (onLoad, onError) {
     createRequest(onLoad, onError, 'GET', URL + '/data');
   };
 
