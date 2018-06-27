@@ -45,12 +45,11 @@
     createRequest(onLoad, onError, 'POST', URL, data);
   };
 
-  var windowError = function (errorMessage) {
-    var fragment = document.createDocumentFragment();
+  var windowError = function () {
     var template = document.querySelector('#picture').content.querySelector('.img-upload__message--error');
     var block = template.cloneNode(true);
     block.classList.remove('hidden');
-    block.setAttribute('style', 'z-index: 1000')
+    block.setAttribute('style', 'z-index: 1000');
     document.body.appendChild(block);
     setTimeout(function () {
       block.setAttribute('style', 'display: none');
