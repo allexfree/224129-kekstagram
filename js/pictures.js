@@ -1,24 +1,20 @@
 'use strict';
 (function () {
 
-// Объявление переменных
+  // Объявление переменных
 
-var PICTURES_QUANTITY = 25;
-var SVG_QUANTITY = 6;
-var VALUE_MIN = 15;
-var VALUE_MAX = 200;
-var userPhotos = [];
-var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
-];
+  var PICTURES_QUANTITY = 25;
+  var SVG_QUANTITY = 6;
+  var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  ];
+  var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
+  ];
 
 
   // Вершины
 
   var fragment = document.createDocumentFragment();
   var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
-  var clone;
   var listElement = document.querySelector('.pictures');
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
@@ -71,11 +67,6 @@ var description = ['Тестим новую камеру!', 'Затусили с
       return photos;
     };
 
-    /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
-    var addElements = function (element) {
-      fragment.appendChild(element);
-    };
-
     bigPictureCancel.addEventListener('click', function () {
       blockBigPicture.classList.add('hidden');
     });
@@ -92,7 +83,7 @@ var description = ['Тестим новую камеру!', 'Затусили с
       fragment.appendChild(fillBlockPicturesElements(photo[i - 1]))
       listElement.appendChild(fragment);
     }
-  }
+  };
 
 window.backend.load(getListPhotos, window.backend.windowError);
 

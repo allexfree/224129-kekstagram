@@ -23,7 +23,15 @@
           onError('Ответ сервера: ' + xhr.status + '' + xhr.statusText);
       }
 
-    })
+    });
+
+    xhr.addEventListener('error', function () {
+      onError('Ошибка загрузки данных');
+    });
+
+    xhr.addEventListener('timeout', function () {
+      onError('Загрузка не успела произойти за ' + timeout + 'мс');
+    });
 
     xhr.open(method, url);
     xhr.send(data);
