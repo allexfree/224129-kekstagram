@@ -46,10 +46,12 @@
   };
 
   var windowError = function (errorMessage) {
-    var block = document.createElement('div');
-    block.style = 'display: block; width: 280px; height: 150px; position: absolute; left: 0; right: 0; margin: 100px auto; padding: 10px; font-size: 16px; color: black; text-align: center; background-color: white; border: 3px dashed red; z-index: 1000';
-    block.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', block);
+    var fragment = document.createDocumentFragment();
+    var template = document.querySelector('#picture').content.querySelector('.img-upload__message--error');
+    var block = template.cloneNode(true);
+    block.classList.remove('hidden');
+    block.setAttribute('style', 'z-index: 1000')
+    document.body.appendChild(block);
     setTimeout(function () {
       block.setAttribute('style', 'display: none');
     }, 3000);
