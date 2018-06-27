@@ -1,0 +1,253 @@
+[33mcommit da419d99039b00143e57ff5ab7a79d6d4bd9b23a[m[33m ([m[1;36mHEAD -> [m[1;32mmodule6-task1[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 27 20:14:44 2018 +0300
+
+    реализацияя пункта ТЗ показать img-upload__message--error
+
+[33mcommit 7a0caf4cb08eb17385cbe2c75ec9a0d14276d72a[m[33m ([m[1;31morigin/module6-task1[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 27 19:20:08 2018 +0300
+
+    Travis
+
+[33mcommit 3a7edd05eaf79732af0f7e65aa6b5eef35cd6a13[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 27 19:16:57 2018 +0300
+
+    Travis
+
+[33mcommit bcfa3d8fdd72c0551a365a8553caf81bc5ba614a[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 27 19:06:38 2018 +0300
+
+    Упростил файл backend, добавил закрытие окна ошибки через 3 секунды
+
+[33mcommit 16a5bb02000fd37c6b06ff9f9b383313d544f8f6[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 26 21:52:30 2018 +0300
+
+    module6-task1
+
+[33mcommit 4cb9ec535222494980887d3075b8970469c08e52[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31macademy/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 7f62f4b cc356a1
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Mon Jun 25 01:53:34 2018 +0300
+
+    Merge pull request #6 from allexfree/module5-task2
+
+[33mcommit cc356a13495bf577f89c8af11330c65f2d8b195f[m[33m ([m[1;31morigin/module5-task2[m[33m, [m[1;32mmodule5-task2[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 01:50:55 2018 +0300
+
+    Модуляция
+
+[33mcommit 7f62f4be398713c330a5e2198756809e7963743c[m
+Merge: 7a8f65e b2316ef
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Mon Jun 25 01:47:41 2018 +0300
+
+    Merge pull request #5 from allexfree/module5-task1
+
+[33mcommit b2316ef2d6b03118406b9f1a30ed551954dd8bbb[m[33m ([m[1;31morigin/module5-task1[m[33m, [m[1;32mmodule5-task1[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 01:41:08 2018 +0300
+
+    module5-task1
+
+[33mcommit 7a8f65e6100ae95dcf3528912d868c6970a4f117[m
+Merge: 3e3d7f3 aa9a3c9
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Mon Jun 25 01:38:05 2018 +0300
+
+    Merge pull request #4 from allexfree/module4-task2
+
+[33mcommit aa9a3c9b9f78e7d0d9135143b6d7889b558d1b27[m[33m ([m[1;31morigin/module4-task2[m[33m, [m[1;32mmodule4-task2[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 01:33:39 2018 +0300
+
+    Поправил переменные
+
+[33mcommit 55cedda57d9d13888b8de208f18b634f6bd20f0d[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 01:31:07 2018 +0300
+
+    Пустой коммит
+
+[33mcommit 3e3d7f306d7e7be5d32ebd4e78704f274ea11c86[m
+Merge: 6991180 9c9e60e
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Mon Jun 25 01:26:54 2018 +0300
+
+    Merge pull request #3 from allexfree/module4-task1
+
+[33mcommit 9c9e60effba1ce5cd95b2bec69e9f0f0ba28cf8d[m[33m ([m[1;31morigin/module4-task1[m[33m, [m[1;32mmodule4-task1[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 01:24:54 2018 +0300
+
+    Travis
+
+[33mcommit b1db4ac27214326bbd838c4a2804f398133f66fc[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Mon Jun 25 00:14:27 2018 +0300
+
+    Исправления
+
+[33mcommit eccab45f9a74c1462b16253a132404108aab9263[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sun Jun 24 23:07:05 2018 +0300
+
+    Travis
+
+[33mcommit d208e8611a842432929ebfe8d9f3a19f386b1441[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sun Jun 24 23:04:36 2018 +0300
+
+    Исправления
+
+[33mcommit ae7d09917c756f13fd50a399042cdd657bf9b492[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 19:36:02 2018 +0300
+
+    Travis
+
+[33mcommit 3fa90d4b547f3ecf06e0743d9d0e5777b8182657[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 19:33:27 2018 +0300
+
+    Travis
+
+[33mcommit 8edaf531701012720d661410fb2cebb98e3c2593[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 19:28:20 2018 +0300
+
+    Хештеги
+
+[33mcommit dfa5d336d970dd7905bc1dea7c43b236cf9ab4fd[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:31:43 2018 +0300
+
+    Travis
+
+[33mcommit 59abfc10aeaaf4e4175303ef961572bd4ca7ff59[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:29:10 2018 +0300
+
+    Travis
+
+[33mcommit acae96e6ea3aa2a05f0df5de9ef7934b141dc5ef[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:16:56 2018 +0300
+
+    Travis
+
+[33mcommit dc0f1e976ff6f87c996c2db9f55056c8430faf4e[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:14:18 2018 +0300
+
+    Travis
+
+[33mcommit baa378f81a724c2275bff271fee715503e46f3b2[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:12:26 2018 +0300
+
+    Travis
+
+[33mcommit 87ff25daa9d6ba5138a86f8ee467265e928695b2[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 23 01:03:22 2018 +0300
+
+    Реализация изменения интенсивности наложенного эффекта, клик по миниатюре открывает нужную фотку
+
+[33mcommit 4cf375b47bb7dcee542fcb8b3a68390771b8f347[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Thu Jun 21 23:24:05 2018 +0300
+
+    Открытие окна редактирования фото, переключение по слайдеру, оживление ползунка
+
+[33mcommit 3534d2cab5b1ba7fd0654c23aae827697969700f[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 20 23:17:27 2018 +0300
+
+    Реализация масштабирования
+
+[33mcommit 6b677a61a9a9f67b2459c0f6257a31ba64c44458[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 19 17:10:46 2018 +0300
+
+    Проблема с querySelector
+
+[33mcommit 6991180314e581df6011031a0d795222c154fb7b[m
+Merge: 026c4ce 49202bf
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Sat Jun 16 00:37:05 2018 +0300
+
+    Merge pull request #2 from allexfree/module3-task1
+
+[33mcommit 49202bfa00e87695c91691448d1d88e3eb05739c[m[33m ([m[1;31morigin/module3-task1[m[33m, [m[1;32mmodule3-task1[m[33m)[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 16 00:36:19 2018 +0300
+
+    Travis
+
+[33mcommit 0cdc6d82ba9c13d292cec7098f28007a76a0aff2[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 16 00:31:52 2018 +0300
+
+    Доработка кода
+
+[33mcommit 86d57d5f0415b2240641df4be1b40e6b0be26a9a[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Sat Jun 16 00:07:19 2018 +0300
+
+    Корректировка кода
+
+[33mcommit 753373a3a2acc28e517e5fa6d6dcac1dfd9edad8[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Thu Jun 14 14:39:28 2018 +0300
+
+    Доработка кода
+
+[33mcommit b2f2b1624c26ee3cdd85d3b593eecbc273bfc5dd[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 13 15:37:58 2018 +0300
+
+    Правки по Travis
+
+[33mcommit df061651bf517490b608747d594a84018f16b1bf[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Wed Jun 13 15:33:17 2018 +0300
+
+    Доработки кода
+
+[33mcommit b4445d27e47f5bb210f6cbe2701eaa312be6ead9[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 12 18:00:31 2018 +0300
+
+    Правки по Travis
+
+[33mcommit 97b2bd04fe9f8b21d9a7fc3d614b828ad92b8923[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 12 17:54:37 2018 +0300
+
+    Правки по Travis
+
+[33mcommit 995283961d6d25eb8387ff3ad60b0ac240d9fe1d[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 12 17:53:11 2018 +0300
+
+    Правки по Travis
+
+[33mcommit 1570adfb7af0a991e7eff11ca3c49fda1e78bbce[m
+Author: allefree <allexfree@yandex.ru>
+Date:   Tue Jun 12 17:45:13 2018 +0300
+
+    Начал выполнять задание 'Пока все дома'
+
+[33mcommit 026c4cef39caf1cbd0a6deeeaea8adc1e570e6fc[m
+Merge: 26163cd ff72a98
+Author: Keks <keksobot@users.noreply.github.com>
+Date:   Wed May 30 10:58:16 2018 +0300
+
+    Merge pull request #1 from allexfree/module1-task1
+
+[33mcommit ff72a98b05074382f65a13c82aace6220b1a430d[m[33m ([m[1;31morigin/module1-task1[m[33m, [m[1;32mmodule1-task1[m
