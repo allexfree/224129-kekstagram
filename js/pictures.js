@@ -44,17 +44,21 @@
     }
   };
 
+  var getCommentText = function (sourceitem) {
+    console.log(sourceitem.comments);
+  }
+
   var photoClickHandler = function (evt) {
     showAndHideElements(blockBigPicture, visibleElement);
     var target = evt.target;
-    blockBigPicture.querySelector('img').src = target.src;
-    console.dir(target);
+    blockBigPicture.querySelector('img').src = 'photos/' + target.src.split(/(\d)/)[1] + '.jpg';
     document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
     document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
-    for (var i = 0; i < listSocialComment.length; i++) {
+    document.querySelector('.likes-count').textContent = target.nextElementSibling.querySelector('.picture__stat--likes').textContent;
+    /*for (var i = 0; i < listSocialComment.length; i++) {
       listSocialComment[i].classList.add('social__comment--text');
-      listSocialComment[i].querySelector('.social__text').textContent = getRandomArrayElement(photo[i - 1].comments);
-    }
+      listSocialComment[i].querySelector('.social__text').textContent = .textContent;
+    }*/
   };
 
   /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */

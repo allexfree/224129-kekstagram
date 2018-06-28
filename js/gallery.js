@@ -124,7 +124,7 @@
       startCoordX = moveEvt.clientX;
 
       position = (scalePin.offsetLeft - shift) * PERCENTAGES / WIDTH_BLOCK_SCALE;
-      setPositionPin(position);
+      setPositionPin(position.toFixed());
       changeEffectIntensity();
     };
 
