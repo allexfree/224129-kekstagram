@@ -5,8 +5,8 @@
 
   var PICTURES_QUANTITY = 25;
   var SVG_QUANTITY = 6;
-  var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
+  /*var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  ];*/
   var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
   ];
 
@@ -47,12 +47,13 @@
   var photoClickHandler = function (evt) {
     showAndHideElements(blockBigPicture, visibleElement);
     var target = evt.target;
-    blockBigPicture.querySelector('img').src = target.id;
+    blockBigPicture.querySelector('img').src = target.src;
+    console.dir(target);
     document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
     document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
     for (var i = 0; i < listSocialComment.length; i++) {
       listSocialComment[i].classList.add('social__comment--text');
-      listSocialComment[i].querySelector('.social__text').textContent = getRandomArrayElement(comments);
+      listSocialComment[i].querySelector('.social__text').textContent = getRandomArrayElement(photo[i - 1].comments);
     }
   };
 
@@ -62,7 +63,6 @@
     photos.querySelector('.picture__img').src = sourceitem.url;
     photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
     photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
-    photos.querySelector('.picture__img').setAttribute('id', '' + sourceitem.url);
     photos.addEventListener('click', photoClickHandler);
     return photos;
   };
