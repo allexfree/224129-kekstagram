@@ -19,7 +19,7 @@
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
-  //var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
+  // var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
 
   // Определение ф-ций
 
