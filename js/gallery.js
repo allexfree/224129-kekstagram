@@ -162,7 +162,7 @@
   var initBigPicture = function () {
     hashtagField.addEventListener('input', window.validation.validateHashtagHandler);
     commentField.addEventListener('input', window.validation.validateCommentHandler);
-  }
+  };
 
   // Обработчики событий
   imgUploadLabel.addEventListener('click', imgUploadChangeHandler);

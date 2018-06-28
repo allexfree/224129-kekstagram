@@ -35,7 +35,7 @@
           msg = '';
           break;
       }
-    })
+    });
 
     return msg;
   };
@@ -46,11 +46,11 @@
   };
 
   var validateHashtagHandler = function (evt) {
-     evt.target.setCustomValidity(checkHashtags(evt.target.value));
+    evt.target.setCustomValidity(checkHashtags(evt.target.value));
   };
 
   var validateCommentHandler = function (evt) {
-     evt.target.setCustomValidity(checkComment(evt.target.value));
+    evt.target.setCustomValidity(checkComment(evt.target.value));
   };
 
   window.validation = {

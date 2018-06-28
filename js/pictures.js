@@ -5,8 +5,8 @@
 
   var PICTURES_QUANTITY = 25;
   var SVG_QUANTITY = 6;
-  /*var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];*/
+  /* var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  ]; */
   var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
   ];
 
@@ -19,7 +19,7 @@
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
-  var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
+  //var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
 
   // Определение ф-ций
 
@@ -44,10 +44,6 @@
     }
   };
 
-  var getCommentText = function (sourceitem) {
-    console.log(sourceitem.comments);
-  }
-
   var photoClickHandler = function (evt) {
     showAndHideElements(blockBigPicture, visibleElement);
     var target = evt.target;
@@ -55,10 +51,10 @@
     document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
     document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
     document.querySelector('.likes-count').textContent = target.nextElementSibling.querySelector('.picture__stat--likes').textContent;
-    /*for (var i = 0; i < listSocialComment.length; i++) {
+    /* for (var i = 0; i < listSocialComment.length; i++) {
       listSocialComment[i].classList.add('social__comment--text');
       listSocialComment[i].querySelector('.social__text').textContent = .textContent;
-    }*/
+    } */
   };
 
   /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
