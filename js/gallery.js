@@ -22,6 +22,7 @@
   var body = document.querySelector('body');
   var uploadImgForm = document.querySelector('#upload-select-image');
   var imgUpload = uploadImgForm.querySelector('#upload-file');
+  var imgUploadLabel = uploadImgForm.querySelector('.img-upload__label');
   var imgUploadOverlay = uploadImgForm.querySelector('.img-upload__overlay');
   var imgUploadCancel = uploadImgForm.querySelector('#upload-cancel');
   var imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview');
@@ -42,6 +43,10 @@
 
   // Объявление ф-ций
 
+  var imgUploadChangeHandler = function () {
+    imgUpload.addEventListener('change', openDialogImg);
+  };
+
   var openDialogImg = function () {
     body.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
@@ -54,7 +59,9 @@
     resizeControl.setAttribute('value', scale.default + '%');
     imgUploadPreview.setAttribute('style', 'transform: 1');
     sliderEffects.classList.remove('hidden');
-    hashtagField.classList.add('hidden');
+    setPositionPin(DEFAULT_EFFECT_VALUE);
+    imgEditable.setAttribute('class', 'effects__preview--none');
+    imgEditable.removeAttribute('style');
   };
 
   var dialogImgPressEsc = function (evt) {
@@ -117,7 +124,7 @@
       startCoordX = moveEvt.clientX;
 
       position = (scalePin.offsetLeft - shift) * PERCENTAGES / WIDTH_BLOCK_SCALE;
-      setPositionPin(position);
+      setPositionPin(position.toFixed());
       changeEffectIntensity();
     };
 
@@ -152,23 +159,35 @@
     }
   };
 
+  var initBigPicture = function () {
+    hashtagField.addEventListener('input', window.validation.validateHashtagHandler);
+    commentField.addEventListener('input', window.validation.validateCommentHandler);
+  };
+
   // Обработчики событий
-  imgUpload.addEventListener('change', openDialogImg);
+  imgUploadLabel.addEventListener('click', imgUploadChangeHandler);
+  imgUploadLabel.addEventListener('click', initBigPicture);
   imgUploadCancel.addEventListener('click', closeDialogImg);
   document.addEventListener('keydown', dialogImgPressEsc);
   buttonResizeMinus.addEventListener('click', makeResizeMinus);
   buttonResizePlus.addEventListener('click', makeResizePlus);
   scalePin.addEventListener('mousedown', scalePinMousedownHandler);
-  scalePin.addEventListener('mouseup', changeEffectIntensity);
   makeChangeEffectHandler();
+
+  uploadImgForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    window.backend.save(closeDialogImg, window.backend.windowError, new FormData(uploadImgForm));
+  });
+
 
   // Вызов ф-ций
   for (var i = 0; i < effectSliderItems.length; i++) {
     effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
   }
 
-
   window.gallery = {
+    ESC_KEYCODE: ESC_KEYCODE,
     dialogImgPressEsc: dialogImgPressEsc,
     commentField: commentField,
     hashtagField: hashtagField

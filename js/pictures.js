@@ -1,15 +1,12 @@
 'use strict';
 (function () {
 
-// Объявление переменных
+  // Объявление переменных
 
   var PICTURES_QUANTITY = 25;
   var SVG_QUANTITY = 6;
-  var VALUE_MIN = 15;
-  var VALUE_MAX = 200;
-  var userPhotos = [];
-  var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
+  /* var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  ]; */
   var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
   ];
 
@@ -18,11 +15,11 @@
 
   var fragment = document.createDocumentFragment();
   var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
-  var clone;
   var listElement = document.querySelector('.pictures');
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
-  var visibleElement = document.querySelectorAll('.social__comment-count, .social__loadmore');
+  var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
+  // var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
 
   // Определение ф-ций
 
@@ -50,26 +47,24 @@
   var photoClickHandler = function (evt) {
     showAndHideElements(blockBigPicture, visibleElement);
     var target = evt.target;
-    blockBigPicture.querySelector('img').src = 'photos/' + target.id + '.jpg';
-    document.querySelector('.likes-count').textContent = userPhotos.likes;
-    document.querySelector('.comments-count').textContent = userPhotos.comments;
+    blockBigPicture.querySelector('img').src = 'photos/' + target.src.split(/(\d)/)[1] + '.jpg';
     document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
-    document.querySelector('.social__text').textContent = getRandomArrayElement(comments);
     document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
+    document.querySelector('.likes-count').textContent = target.nextElementSibling.querySelector('.picture__stat--likes').textContent;
+    /* for (var i = 0; i < listSocialComment.length; i++) {
+      listSocialComment[i].classList.add('social__comment--text');
+      listSocialComment[i].querySelector('.social__text').textContent = .textContent;
+    } */
   };
 
   /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
-  var fillBlockPicturesElements = function (element, sourceitem) {
-    element.querySelector('.picture__img').src = sourceitem.url;
-    element.querySelector('.picture__stat--comments').textContent = sourceitem.comments;
-    element.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
-    element.querySelector('.picture__img').setAttribute('id', '' + i);
-    element.addEventListener('click', photoClickHandler);
-  };
-
-  /* Ф-ция addElements добавляет заполненые DOM-элементы в блок .pictures */
-  var addElements = function (element) {
-    fragment.appendChild(element);
+  var fillBlockPicturesElements = function (sourceitem) {
+    var photos = photoTemplate.cloneNode(true);
+    photos.querySelector('.picture__img').src = sourceitem.url;
+    photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
+    photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+    photos.addEventListener('click', photoClickHandler);
+    return photos;
   };
 
   bigPictureCancel.addEventListener('click', function () {
@@ -77,20 +72,19 @@
   });
 
   document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === window.gallery.ESC_KEYCODE) {
       blockBigPicture.classList.add('hidden');
     }
   });
 
   // вызов ф-ций
+  var getListPhotos = function (photo) {
+    for (var i = 1; i <= PICTURES_QUANTITY; i++) {
+      fragment.appendChild(fillBlockPicturesElements(photo[i - 1]));
+      listElement.appendChild(fragment);
+    }
+  };
 
-  for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-    userPhotos.push({url: 'photos/' + i + '.jpg', likes: getRandomMinMax(VALUE_MIN, VALUE_MAX), comments: getRandomMinMax(VALUE_MIN, VALUE_MAX), description: getRandomArrayElement(description), id: i}); // формирование массива userPhotos
-    clone = photoTemplate.cloneNode(true);
-    fillBlockPicturesElements(clone, userPhotos[i - 1]);
-    addElements(clone);
-  }
-
-  listElement.appendChild(fragment);
+  window.backend.load(getListPhotos, window.backend.windowError);
 
 })();

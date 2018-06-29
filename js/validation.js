@@ -9,42 +9,53 @@
   var COMMENT_INVALID = 'Длина текста не должна превышать 140 символов';
   var COMMENT_VALID = '';
 
-  var checkHashtags = function (tags) {
-    if (tags.length > MOUNT_HASHTAG) {
-      return 'Кол-во хештегов не должно быть больше пяти';
-    }
-    for (var i = 0; i < tags.length; i++) {
-      if ((tags[i].charAt(0) !== '#') || (tags[i] === '')) {
-        return 'Хэштег должен начинаться с символа #';
+  var checkHashtags = function (element) {
+    var tags = element.split(' ');
+    var msg = '';
+
+    tags.forEach(function (item) {
+
+      switch (true) {
+        case (item.length > MOUNT_HASHTAG):
+          msg = 'Кол-во хештегов не должно быть больше пяти';
+          break;
+        case ((item.charAt(0) !== '#') || (item === '')):
+          msg = 'Хэштег должен начинаться с символа #';
+          break;
+        case (item.indexOf('#', 1) > 1):
+          msg = 'Разделите хештеги пробелами';
+          break;
+        case (item.length < MIN_SYMBOLS):
+          msg = 'Хэштег должен содержать не менее 2х символов, не считая символ #';
+          break;
+        case (item.length > MAX_SYMBOLS):
+          msg = 'В хештеге должно быть не более 20 символов включая #';
+          break;
+        default:
+          msg = '';
+          break;
       }
-      if (tags[i].indexOf('#', 1) > 1) {
-        return 'Разделите хештеги пробелами';
-      }
-      if (tags[i].length < MIN_SYMBOLS) {
-        return 'Хэштег должен содержать не менее 2х символов, не считая символ #';
-      }
-      if (tags[i].length > MAX_SYMBOLS) {
-        return 'В хештеге должно быть не более 20 символов включая #!';
-      }
-      for (var j = i + 1; j < tags.length; j++) {
-        if (tags[i].toLowerCase() === tags[j].toLowerCase()) {
-          return 'Есть одинаковые хештеги, пожалуйста, исправьте';
-        }
-      }
-    }
-    return '';
+    });
+
+    return msg;
   };
 
-  var hashtagInputHandler = function (evt) {
-    var tags = evt.target.value.split(' ');
-    window.gallery.hashtagField.setCustomValidity(checkHashtags(tags));
+
+  var checkComment = function (comment) {
+    return comment.length > MAX_LENGTH_COMMENT_FIELD ? COMMENT_INVALID : COMMENT_VALID;
   };
 
-  var commentInputHandler = function () {
-    window.gallery.commentField.setCustomValidity((window.gallery.commentField.value.length > MAX_LENGTH_COMMENT_FIELD) ? COMMENT_INVALID : COMMENT_VALID);
+  var validateHashtagHandler = function (evt) {
+    evt.target.setCustomValidity(checkHashtags(evt.target.value));
   };
 
-  window.gallery.hashtagField.addEventListener('input', hashtagInputHandler);
-  window.gallery.commentField.addEventListener('input', commentInputHandler);
+  var validateCommentHandler = function (evt) {
+    evt.target.setCustomValidity(checkComment(evt.target.value));
+  };
+
+  window.validation = {
+    validateHashtagHandler: validateHashtagHandler,
+    validateCommentHandler: validateCommentHandler
+  };
 
 })();
