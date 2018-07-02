@@ -60,6 +60,6 @@
   window.backend = {
     load: load,
     save: save,
-    windowError: windowError
+    windowError: windowError,
   };
 })();

@@ -21,6 +21,11 @@
   var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
   var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
 
+  var imgFilter = document.querySelector('.img-filters');
+  var imgFilterForm = imgFilter.querySelector('.img-filters__form');
+  var imgFilterButtons = imgFilterForm.querySelectorAll('.img-filters__button');
+  var filterButtonActive = imgFilter.querySelector('.img-filters__button--active');
+
   // Определение ф-ций
 
   /* Ф-ция getRandomMinMax получает случайное число от min до max */
@@ -59,13 +64,16 @@
     photos.querySelector('.picture__img').src = sourceitem.url;
     photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
     photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
-
     listSocialComment.forEach(function (item, i) {
       item.classList.add('social__comment--text');
       item.querySelector('.social__text').textContent = sourceitem.comments[i];
     });
 
+    imgFilter.classList.remove('img-filters--inactive');
+
     photos.addEventListener('click', photoClickHandler);
+    imgFilterForm.addEventListener('click', imgFilterFormClickHandler);
+
     return photos;
   };
 
@@ -79,16 +87,31 @@
     }
   });
 
+  var imgFilterFormClickHandler = function (evt) {
+    imgFilterButtons.forEach(function (item) {
+      item.classList.remove('img-filters__button--active');
+    });
+    evt.target.classList.add('img-filters__button--active');
+    for (var i = 1; i <= PICTURES_QUANTITY; i++) {
+      fragment.appendChild(fillBlockPicturesElements(userPhotos[i - 1]));
+      listElement.appendChild(fragment);
+    }
+  };
+
   // вызов ф-ций
   var getListPhotos = function (photo) {
+
     userPhotos = photo.slice().sort(function (left, right) {
         return right.comments.length - left.comments.length;
     });
 
-    for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-      fragment.appendChild(fillBlockPicturesElements(photo[i - 1]));
-      listElement.appendChild(fragment);
+    if (imgFilterButtons[0].getAttribute('class') === 'img-filters__button img-filters__button--active') {
+      for (var i = 1; i <= PICTURES_QUANTITY; i++) {
+        fragment.appendChild(fillBlockPicturesElements(photo[i - 1]));
+        listElement.appendChild(fragment);
+      }
     }
+
   };
 
   window.backend.load(getListPhotos, window.backend.windowError);
@@ -96,7 +119,8 @@
   window.pictures = {
     getListPhotos: getListPhotos,
     userPhotos: userPhotos,
-    listElement: listElement
+    listElement: listElement,
+    fragment: fragment
   };
 
 })();
