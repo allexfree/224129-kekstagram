@@ -16,7 +16,7 @@
     tags.forEach(function (item) {
 
       switch (true) {
-        case (item.length > MOUNT_HASHTAG):
+        case (tags.length > MOUNT_HASHTAG):
           msg = 'Кол-во хештегов не должно быть больше пяти';
           break;
         case ((item.charAt(0) !== '#') || (item === '')):

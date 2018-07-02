@@ -180,11 +180,9 @@
     window.backend.save(closeDialogImg, window.backend.windowError, new FormData(uploadImgForm));
   });
 
-
-  // Вызов ф-ций
-  for (var i = 0; i < effectSliderItems.length; i++) {
-    effectSliderItems[i].addEventListener('click', makeChangeEffectHandler);
-  }
+  effectSliderItems.forEach(function (item) {
+    item.addEventListener('click', makeChangeEffectHandler);
+  });
 
   window.gallery = {
     ESC_KEYCODE: ESC_KEYCODE,

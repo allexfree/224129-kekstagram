@@ -35,6 +35,7 @@
 
     xhr.open(method, url);
     xhr.send(data);
+
   };
 
   var load = function (onLoad, onError) {
