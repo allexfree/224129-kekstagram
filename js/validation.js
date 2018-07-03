@@ -12,6 +12,14 @@
   var checkHashtags = function (element) {
     var tags = element.split(' ');
     var msg = '';
+    var currentHashtag = tags[0];
+
+    for (var i = 1; i < tags.length; i++) {
+        if (tags[i].toUpperCase() === currentHashtag.toUpperCase()) {
+          msg = 'Одинаковые';
+        }
+        currentHashtag = tags[i];
+      }
 
     tags.forEach(function (item) {
 

@@ -7,7 +7,7 @@
   var userPhotos = [];
   var PICTURES_QUANTITY = 25;
   var SVG_QUANTITY = 6;
-  var description = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
+  var descriptions = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
   ];
 
 
@@ -28,99 +28,64 @@
 
   // Определение ф-ций
 
-  /* Ф-ция getRandomMinMax получает случайное число от min до max */
-  var getRandomMinMax = function (min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
-
-  /* Ф-ция getRandomArrayElement получает случайный элемент массива, указанного в парметре array */
-  var getRandomArrayElement = function (array) {
-    return array[Math.floor(Math.random() * array.length)];
-  };
-
   /* Ф-ция showAndHideElements показывает и скрывает элементы блоков.
   Параметры:
     elementInvisible - элемент, который нужно показать;
     elementVisible - элемент, который нужно спрятать. */
-  var showAndHideElements = function (elementInvisible, elementVisible) {
-    elementInvisible.classList.remove('hidden');
-    elementVisible.forEach(function (item) {
-      item.classList.add('visually-hidden');
-    });
-  };
+    var showAndHideElements = function (elementInvisible, elementVisible) {
+      elementInvisible.classList.remove('hidden');
+      elementVisible.forEach(function (item) {
+        item.classList.add('visually-hidden');
+      });
+    };
 
-  var photoClickHandler = function (evt) {
-    showAndHideElements(blockBigPicture, visibleElement);
-    var target = evt.target;
-    blockBigPicture.querySelector('img').src = 'photos/' + target.src.split(/(\d)/)[1] + '.jpg';
-    document.querySelector('.social__picture').src = 'img/avatar-' + getRandomMinMax(1, SVG_QUANTITY) + '.svg';
-    document.querySelector('.social__caption').textContent = getRandomArrayElement(description);
-    document.querySelector('.likes-count').textContent = target.nextElementSibling.querySelector('.picture__stat--likes').textContent;
-  };
+    var photoClickHandler = function (evt) {
+      showAndHideElements(blockBigPicture, visibleElement);
+      var target = evt.target;
+      blockBigPicture.querySelector('img').src = target.id; /* 'photos/' + target.src.split(/(\d)/)[1] + '.jpg' */
+      document.querySelector('.social__picture').src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+      document.querySelector('.social__caption').textContent = window.utils.getRandomArrayElement(descriptions);
+      document.querySelector('.likes-count').textContent = target.nextElementSibling.querySelector('.picture__stat--likes').textContent;
+    };
 
-  /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
-  var fillBlockPicturesElements = function (sourceitem) {
-    var photos = photoTemplate.cloneNode(true);
-    photos.querySelector('.picture__img').src = sourceitem.url;
-    photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
-    photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
-    listSocialComment.forEach(function (item, i) {
-      item.classList.add('social__comment--text');
-      item.querySelector('.social__text').textContent = sourceitem.comments[i];
-    });
+    /* Ф-ция fillBlockPicturesElements выполняет заполнение блока элементами на основе массива из параметра array */
+    var fillBlockPicturesElements = function (sourceitem) {
+      var photos = photoTemplate.cloneNode(true);
+      photos.querySelector('.picture__img').setAttribute('id', sourceitem.url);
+      photos.querySelector('.picture__img').src = sourceitem.url;
+      photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
+      photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+      listSocialComment.forEach(function (item, i) {
+        item.classList.add('social__comment--text');
+        item.querySelector('.social__text').textContent = sourceitem.comments[i];
+      });
 
-    imgFilter.classList.remove('img-filters--inactive');
+      window.filters.imgFilter.classList.remove('img-filters--inactive');
 
-    photos.addEventListener('click', photoClickHandler);
-    imgFilterForm.addEventListener('click', imgFilterFormClickHandler);
+      photos.addEventListener('click', photoClickHandler);
+      window.filters.imgFilterForm.addEventListener('click', window.filters.imgFilterFormClickHandler);
 
-    return photos;
-  };
+      return photos;
+    };
 
-  bigPictureCancel.addEventListener('click', function () {
-    blockBigPicture.classList.add('hidden');
-  });
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.gallery.ESC_KEYCODE) {
+    var bigPictureClickHandler = function () {
       blockBigPicture.classList.add('hidden');
-    }
-  });
+    };
 
-  var imgFilterFormClickHandler = function (evt) {
-    imgFilterButtons.forEach(function (item) {
-      item.classList.remove('img-filters__button--active');
-    });
-    evt.target.classList.add('img-filters__button--active');
-    for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-      fragment.appendChild(fillBlockPicturesElements(userPhotos[i - 1]));
-      listElement.appendChild(fragment);
-    }
-  };
+    bigPictureCancel.addEventListener('click', bigPictureClickHandler);
 
-  // вызов ф-ций
-  var getListPhotos = function (photo) {
-
-    userPhotos = photo.slice().sort(function (left, right) {
-        return right.comments.length - left.comments.length;
-    });
-
-    if (imgFilterButtons[0].getAttribute('class') === 'img-filters__button img-filters__button--active') {
-      for (var i = 1; i <= PICTURES_QUANTITY; i++) {
-        fragment.appendChild(fillBlockPicturesElements(photo[i - 1]));
-        listElement.appendChild(fragment);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.utils.ESC_KEYCODE) {
+        blockBigPicture.classList.add('hidden');
       }
-    }
+    });
 
-  };
-
-  window.backend.load(getListPhotos, window.backend.windowError);
 
   window.pictures = {
-    getListPhotos: getListPhotos,
     userPhotos: userPhotos,
     listElement: listElement,
-    fragment: fragment
+    fragment: fragment,
+    fillBlockPicturesElements: fillBlockPicturesElements
   };
 
 })();

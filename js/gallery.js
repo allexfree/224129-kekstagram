@@ -5,10 +5,10 @@
 
   // Объявление переменных
 
-  var ESC_KEYCODE = 27;
   var DEFAULT_EFFECT_VALUE = 100;
-  var PERCENTAGES = 100;
   var WIDTH_BLOCK_SCALE = 453;
+  var MAX_BRIGHTNESS = 2;
+  var MAX_BLUR = 3;
   var scale = {default: 100, min: 25, max: 100, step: 25};
   var resize;
   var effectClassName;
@@ -51,6 +51,16 @@
     body.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
     resizeControl.setAttribute('value', scale.default + '%');
+
+    imgUploadCancel.addEventListener('click', closeDialogImg);
+    document.addEventListener('keydown', dialogImgPressEsc);
+    buttonResizeMinus.addEventListener('click', resizeMinus);
+    buttonResizePlus.addEventListener('click', resizePlus);
+    scalePin.addEventListener('mousedown', scalePinMousedownHandler);
+
+    effectSliderItems.forEach(function (item) {
+      item.addEventListener('click', makeChangeEffectHandler);
+    });
   };
 
   var closeDialogImg = function () {
@@ -62,21 +72,31 @@
     setPositionPin(DEFAULT_EFFECT_VALUE);
     imgEditable.setAttribute('class', 'effects__preview--none');
     imgEditable.removeAttribute('style');
+
+    imgUploadCancel.removeEventListener('click', closeDialogImg);
+    document.removeEventListener('keydown', dialogImgPressEsc);
+    buttonResizeMinus.removeEventListener('click', resizeMinus);
+    buttonResizePlus.removeEventListener('click', resizePlus);
+    scalePin.removeEventListener('mousedown', scalePinMousedownHandler);
+
+    effectSliderItems.forEach(function (item) {
+      item.removeEventListener('click', makeChangeEffectHandler);
+    });
   };
 
   var dialogImgPressEsc = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE && evt.target !== hashtagField && evt.target !== commentField) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE && evt.target !== hashtagField && evt.target !== commentField) {
       closeDialogImg();
     }
   };
 
-  var makeResizeMinus = function () {
+  var resizeMinus = function () {
     resize = Math.max(parseInt(resizeControl.value, 10) - scale.step, scale.min);
     resizeControl.value = resize + '%';
     return transformImg();
   };
 
-  var makeResizePlus = function () {
+  var resizePlus = function () {
     resize = Math.min(parseInt(resizeControl.value, 10) + scale.step, scale.max);
     resizeControl.value = resize + '%';
     return transformImg();
@@ -123,7 +143,7 @@
       shift = startCoordX - moveEvt.clientX;
       startCoordX = moveEvt.clientX;
 
-      position = (scalePin.offsetLeft - shift) * PERCENTAGES / WIDTH_BLOCK_SCALE;
+      position = (scalePin.offsetLeft - shift) * window.utils.PERCENTAGES / WIDTH_BLOCK_SCALE;
       setPositionPin(position.toFixed());
       changeEffectIntensity();
     };
@@ -142,10 +162,10 @@
   var changeEffectIntensity = function () {
     switch (imgEditable.getAttribute('class')) {
       case 'effects__preview--heat':
-        imgEditable.style.filter = 'brightness(' + (scaleValue.value * 2 / 100 + 1).toFixed(1) + ')';
+        imgEditable.style.filter = 'brightness(' + (scaleValue.value * MAX_BRIGHTNESS / 100 + 1).toFixed(1) + ')';
         break;
       case 'effects__preview--phobos':
-        imgEditable.style.filter = 'blur(' + (scaleValue.value * 3 / 100).toFixed(1) + 'px)';
+        imgEditable.style.filter = 'blur(' + (scaleValue.value * MAX_BLUR / 100).toFixed(1) + 'px)';
         break;
       case 'effects__preview--marvin':
         imgEditable.style.filter = 'invert(' + Math.round(scaleValue.value) + '%)';
@@ -167,11 +187,7 @@
   // Обработчики событий
   imgUploadLabel.addEventListener('click', imgUploadChangeHandler);
   imgUploadLabel.addEventListener('click', initBigPicture);
-  imgUploadCancel.addEventListener('click', closeDialogImg);
-  document.addEventListener('keydown', dialogImgPressEsc);
-  buttonResizeMinus.addEventListener('click', makeResizeMinus);
-  buttonResizePlus.addEventListener('click', makeResizePlus);
-  scalePin.addEventListener('mousedown', scalePinMousedownHandler);
+
   makeChangeEffectHandler();
 
   uploadImgForm.addEventListener('submit', function (evt) {
@@ -180,12 +196,8 @@
     window.backend.save(closeDialogImg, window.backend.windowError, new FormData(uploadImgForm));
   });
 
-  effectSliderItems.forEach(function (item) {
-    item.addEventListener('click', makeChangeEffectHandler);
-  });
 
   window.gallery = {
-    ESC_KEYCODE: ESC_KEYCODE,
     dialogImgPressEsc: dialogImgPressEsc,
     commentField: commentField,
     hashtagField: hashtagField
