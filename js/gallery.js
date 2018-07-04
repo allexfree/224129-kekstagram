@@ -32,7 +32,6 @@
   var scaleValue = document.querySelector('.scale__value');
   var scalePin = document.querySelector('.scale__pin');
   var scaleLevel = document.querySelector('.scale__level');
-  var sliderEffects = document.querySelector('.img-upload__effects');
   var effectSliderItems = document.querySelectorAll('input[type=radio]');
   var effectValue = document.querySelector('input[type=radio]:checked').value;
 
