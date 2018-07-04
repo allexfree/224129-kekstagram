@@ -27,6 +27,6 @@
     resize: resize,
     resizeMinus: resizeMinus,
     resizePlus: resizePlus
-  }
+  };
 
 })();

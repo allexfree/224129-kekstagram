@@ -35,19 +35,19 @@
 
         while (filteredPhotos.length < UNIQUE_PHOTOS_SIZE) {
           randomItem = window.utils.getRandomArrayElement(photos);
-          if (filteredPhotos.indexOf (randomItem) === -1) {
-            filteredPhotos.push (randomItem);
+          if (filteredPhotos.indexOf(randomItem) === -1) {
+            filteredPhotos.push(randomItem);
           }
-        };
+        }
 
         break;
 
-        default:
-          filteredPhotos = photos;
+      default:
+        filteredPhotos = photos;
         break;
     }
     return filteredPhotos;
-  }
+  };
 
 
   window.filters = {
@@ -55,6 +55,6 @@
     imgFilterForm: imgFilterForm,
     imgFilterFormClickHandler: imgFilterFormClickHandler,
     filterPhotos: filterPhotos
-  }
+  };
 
 })();
