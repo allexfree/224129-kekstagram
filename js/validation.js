@@ -13,7 +13,7 @@
     var tags = elementValue.toLowerCase().split(' ');
     var message = '';
 
-    tags.every(function(item, i, dataTags) {
+    tags.every(function (item, i, dataTags) {
       var tagPosition = dataTags.indexOf(item);
       switch (true) {
         case (tagPosition !== -1 && tagPosition !== i):
