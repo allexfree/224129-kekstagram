@@ -2,9 +2,9 @@
 
 (function () {
 
-  var DEBOUNCE_INTERVAL = 300; // ms
+  var DEBOUNCE_INTERVAL = 500; // ms
 
-  var debounce = function (fun) {
+  window.debounce = function (fun) {
     var lastTimeout = null;
 
     return function () {
@@ -16,10 +16,6 @@
         fun.apply(null, args);
       }, DEBOUNCE_INTERVAL);
     };
-  };
-
-  window.debounce = {
-    debounce: debounce
   };
 
 })();

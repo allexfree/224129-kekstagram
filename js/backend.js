@@ -46,20 +46,8 @@
     createRequest(onLoad, onError, 'POST', URL, data);
   };
 
-  var windowError = function () {
-    var template = document.querySelector('#picture').content.querySelector('.img-upload__message--error');
-    var block = template.cloneNode(true);
-    block.classList.remove('hidden');
-    block.setAttribute('style', 'z-index: 1000');
-    document.body.appendChild(block);
-    setTimeout(function () {
-      block.setAttribute('style', 'display: none');
-    }, 3000);
-  };
-
   window.backend = {
     load: load,
     save: save,
-    windowError: windowError,
   };
 })();

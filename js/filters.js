@@ -6,19 +6,22 @@
 
   var imgFilter = document.querySelector('.img-filters');
   var imgFilterForm = imgFilter.querySelector('.img-filters__form');
-  /* var imgFilterButtons = imgFilterForm.querySelectorAll('.img-filters__button');
-  var filterButtonActive = imgFilter.querySelector('.img-filters__button--active'); */
 
-  var imgFilterFormClickHandler = function (evt) {
+  var imgFilterFormClickHandler = window.debounce(function (evt) {
     var className = 'img-filters__button--active';
 
     imgFilter.querySelector('.' + className).classList.remove(className);
 
     evt.target.classList.add(className);
+    var filteredPhotos = filterPhotos ( window.pictures.userPhotos, evt.target.id );
+    window.pictures.drawPhotos ( filteredPhotos );
 
-  };
+  });
 
   var filterPhotos = function (photos, targetId) {
+    if (photos.length === 0) {
+      return photos;
+    }
 
     var filteredPhotos = [];
     switch (targetId) {
