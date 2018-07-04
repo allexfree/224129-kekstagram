@@ -19,7 +19,7 @@
 
   var transformImg = function () {
     var transform = resize / 100;
-    window.gallery.imgUploadPreview.style.transform = 'scale(' + transform + ')';
+    window.gallery.imageUploadPreview.style.transform = 'scale(' + transform + ')';
   };
 
   window.resize = {

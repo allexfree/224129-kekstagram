@@ -28,6 +28,7 @@
   var buttonResizeMinus = imageUploadOverlay.querySelector('.resize__control--minus');
   var buttonResizePlus = imageUploadOverlay.querySelector('.resize__control--plus');
   var resizeControl = imageUploadOverlay.querySelector('.resize__control--value');
+  var scaleLine = document.querySelector('.img-upload__scale');
   var scaleValue = document.querySelector('.scale__value');
   var scalePin = document.querySelector('.scale__pin');
   var scaleLevel = document.querySelector('.scale__level');
@@ -67,7 +68,7 @@
   var makeChangeEffectHandler = function () {
     resetEffect();
     if (effectValue === 'none') {
-      sliderEffects.classList.add('hidden');
+      scaleLine.classList.add('hidden');
     }
     effectClassName = 'effects__preview--' + effectValue;
     imageEditable.className = '';
@@ -122,7 +123,7 @@
     imageUploadOverlay.classList.add('hidden');
     resizeControl.setAttribute('value', window.resize.scale.default + '%');
     imageUploadPreview.setAttribute('style', 'transform: 1');
-    sliderEffects.classList.remove('hidden');
+    scaleLine.classList.remove('hidden');
     setPositionPin(DEFAULT_EFFECT_VALUE);
     imageEditable.setAttribute('class', 'effects__preview--none');
     imageEditable.removeAttribute('style');
