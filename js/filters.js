@@ -13,8 +13,8 @@
     imgFilter.querySelector('.' + className).classList.remove(className);
 
     evt.target.classList.add(className);
-    var filteredPhotos = filterPhotos ( window.pictures.userPhotos, evt.target.id );
-    window.pictures.drawPhotos ( filteredPhotos );
+    var filteredPhotos = filterPhotos (window.pictures.userPhotos, evt.target.id);
+    window.pictures.drawPhotos (filteredPhotos);
 
   });
 

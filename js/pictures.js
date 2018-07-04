@@ -1,5 +1,5 @@
   'use strict';
-(function () {
+  (function () {
 
   // Объявление переменных
 
@@ -130,12 +130,12 @@
     }, 3000);
   };
 
-  var loadSuccessHandler = function ( photos ) {
+  var loadSuccessHandler = function (photos) {
     window.pictures.userPhotos = photos;
-    drawPhotos ( photos );
-  }
+    drawPhotos(photos);
+  };
 
-  var drawPhotos = function (photos, targetId) {
+  var drawPhotos = function (photos) {
 
     pictureList.querySelectorAll('a').forEach(function (item) {
       pictureList.removeChild(item);
@@ -151,7 +151,7 @@
   };
 
 
-  window.backend.load(loadSuccessHandler, loadErrorHandler );
+  window.backend.load(loadSuccessHandler, loadErrorHandler);
 
 
   window.pictures = {
