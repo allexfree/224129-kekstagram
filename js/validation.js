@@ -15,10 +15,10 @@
     var currentHashtag = tags[0];
 
     for (var i = 1; i < tags.length; i++) {
-          if (tags[i].toLowerCase() === currentHashtag.toLowerCase()) {
-            msg = 'Одинаковые хештеги';
-          }
-        }
+      if (tags[i].toLowerCase() === currentHashtag.toLowerCase()) {
+        msg = 'Одинаковые хештеги';
+      }
+    }
 
     tags.forEach(function (item) {
 

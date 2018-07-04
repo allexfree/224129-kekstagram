@@ -20,6 +20,6 @@
     PERCENTAGES: PERCENTAGES,
     getRandomMinMax: getRandomMinMax,
     getRandomArrayElement: getRandomArrayElement
-  }
+  };
 
 })();

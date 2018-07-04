@@ -18,14 +18,11 @@
   var listElement = document.querySelector('.pictures');
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPicturePreview = blockBigPicture.querySelector('.big-picture__preview');
-  console.log(bigPicturePreview);
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
 
   var imgFilter = document.querySelector('.img-filters');
   var imgFilterForm = imgFilter.querySelector('.img-filters__form');
-  var imgFilterButtons = imgFilterForm.querySelectorAll('.img-filters__button');
-  var filterButtonActive = imgFilter.querySelector('.img-filters__button--active');
 
   // Определение ф-ций
 
@@ -33,87 +30,87 @@
   Параметры:
     elementInvisible - элемент, который нужно показать;
     elementVisible - элемент, который нужно спрятать. */
-    var showAndHideElements = function (elementInvisible, elementVisible) {
-      elementInvisible.classList.remove('hidden');
-      elementVisible.forEach(function (item) {
-        item.classList.add('visually-hidden');
-      });
-    };
+  var showAndHideElements = function (elementInvisible, elementVisible) {
+    elementInvisible.classList.remove('hidden');
+    elementVisible.forEach(function (item) {
+      item.classList.add('visually-hidden');
+    });
+  };
 
-    /* по клику на миниатюру показывает большую фотографию */
-    var photoClickHandler = function (evt) {
-      showAndHideElements(blockBigPicture, visibleElement);
-      var target = evt.target;
-      var id = parseInt ( target.src.substring( target.src.lastIndexOf('/')+1, target.src.indexOf('.')), 10 );
-      var sourceitem = userPhotos[id];
+  /* по клику на миниатюру показывает большую фотографию */
+  var photoClickHandler = function (evt) {
+    showAndHideElements(blockBigPicture, visibleElement);
+    var target = evt.target;
+    var id = parseInt (target.src.substring(target.src.lastIndexOf('/')+1, target.src.indexOf('.')), 10);
+    var sourceitem = userPhotos[id];
 
-      blockBigPicture.querySelector('img').src = target.src;
-      bigPicturePreview.querySelector('.social__picture').src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
-      bigPicturePreview.querySelector('.social__caption').textContent = window.utils.getRandomArrayElement(descriptions);
-      bigPicturePreview.querySelector('.likes-count').textContent = sourceitem.likes;
+    blockBigPicture.querySelector('img').src = target.src;
+    bigPicturePreview.querySelector('.social__picture').src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+    bigPicturePreview.querySelector('.social__caption').textContent = window.utils.getRandomArrayElement(descriptions);
+    bigPicturePreview.querySelector('.likes-count').textContent = sourceitem.likes;
 
-      var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
-      var listSocialCommentNode = document.querySelector('.social__comments');
+    var listSocialComment = blockBigPicture.querySelectorAll('.social__comment');
+    var listSocialCommentNode = document.querySelector('.social__comments');
 
-      listSocialComment.forEach(function (item, i) {
-        listSocialCommentNode.removeChild (item);
-      });
+    listSocialComment.forEach(function (item, i) {
+      listSocialCommentNode.removeChild (item);
+    });
 
       // add fragment
-      var commentFragment = document.createDocumentFragment();
+    var commentFragment = document.createDocumentFragment();
 
-      for (var i = 0; i < MAX_COMMENT_LENGTH; i++) {
+    for (var i = 0; i < MAX_COMMENT_LENGTH; i++) {
 
-        var item = sourceitem.comments[i];
-        var liNode = document.createElement('li');
-        liNode.classList.add('social__comment', 'social__comment--text');
-        commentFragment.appendChild (liNode);
+      var item = sourceitem.comments[i];
+      var liNode = document.createElement('li');
+      liNode.classList.add('social__comment', 'social__comment--text');
+      commentFragment.appendChild (liNode);
 
-        var imageNode = document.createElement('img');
-        imageNode.classList.add('social__picture');
-        imageNode.src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
-        liNode.appendChild (imageNode);
-
-
-        var paragraphNode = document.createElement('p');
-        paragraphNode.classList.add('social__text');
-        paragraphNode.textContent = item;
-
-        liNode.appendChild (paragraphNode);
-
-     }
-
-     listSocialCommentNode.appendChild (commentFragment);
-
-    };
-
-    /* Ф-ция fillBlockPicturesElements рисует миниатюрки, т.е. выполняет заполнение блока элементами на основе массива из параметра sourceitem */
-    var fillBlockPicturesElements = function(sourceitem) {
-      var photos = photoTemplate.cloneNode(true);
-      photos.querySelector('.picture__img').src = sourceitem.url;
-      photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
-      photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+      var imageNode = document.createElement('img');
+      imageNode.classList.add('social__picture');
+      imageNode.src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+      liNode.appendChild (imageNode);
 
 
-      window.filters.imgFilter.classList.remove('img-filters--inactive');
+      var paragraphNode = document.createElement('p');
+      paragraphNode.classList.add('social__text');
+      paragraphNode.textContent = item;
 
-      photos.addEventListener('click', photoClickHandler);
-      window.filters.imgFilterForm.addEventListener('click', window.filters.imgFilterFormClickHandler);
+      liNode.appendChild (paragraphNode);
 
-      return photos;
-    };
+    }
 
-    var bigPictureClickHandler = function () {
+    listSocialCommentNode.appendChild (commentFragment);
+
+  };
+
+  /* Ф-ция fillBlockPicturesElements рисует миниатюрки, т.е. выполняет заполнение блока элементами на основе массива из параметра sourceitem */
+  var fillBlockPicturesElements = function(sourceitem) {
+    var photos = photoTemplate.cloneNode(true);
+    photos.querySelector('.picture__img').src = sourceitem.url;
+    photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
+    photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;
+
+
+    window.filters.imgFilter.classList.remove('img-filters--inactive');
+
+    photos.addEventListener('click', photoClickHandler);
+    window.filters.imgFilterForm.addEventListener('click', window.filters.imgFilterFormClickHandler);
+
+    return photos;
+  };
+
+  var bigPictureClickHandler = function () {
+    blockBigPicture.classList.add('hidden');
+  };
+
+  bigPictureCancel.addEventListener('click', bigPictureClickHandler);
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       blockBigPicture.classList.add('hidden');
-    };
-
-    bigPictureCancel.addEventListener('click', bigPictureClickHandler);
-
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.utils.ESC_KEYCODE) {
-        blockBigPicture.classList.add('hidden');
-      }
-    });
+    }
+  });
 
   var windowError = function () {
     var template = document.querySelector('#picture').content.querySelector('.img-upload__message--error');
