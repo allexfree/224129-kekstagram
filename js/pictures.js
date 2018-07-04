@@ -20,7 +20,6 @@
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var visibleElement = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
 
-  var imgFilter = document.querySelector('.img-filters');
 
   // Определение ф-ций
 
