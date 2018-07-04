@@ -9,8 +9,6 @@
   var WIDTH_BLOCK_SCALE = 453;
   var MAX_BRIGHTNESS = 2;
   var MAX_BLUR = 3;
-  var scale = {default: 100, min: 25, max: 100, step: 25};
-  var resize;
   var effectClassName;
   var startCoordX;
   var shift;
@@ -47,79 +45,22 @@
     imgUpload.addEventListener('change', openDialogImg);
   };
 
-  var openDialogImg = function () {
-    body.classList.add('modal-open');
-    imgUploadOverlay.classList.remove('hidden');
-    resizeControl.setAttribute('value', scale.default + '%');
-
-    imgUploadCancel.addEventListener('click', closeDialogImg);
-    document.addEventListener('keydown', dialogImgPressEsc);
-    buttonResizeMinus.addEventListener('click', resizeMinus);
-    buttonResizePlus.addEventListener('click', resizePlus);
-    scalePin.addEventListener('mousedown', scalePinMousedownHandler);
-
-    effectSliderItems.forEach(function (item) {
-      item.addEventListener('click', makeChangeEffectHandler);
-    });
+  var imgUploadCancelClickHandler = function () {
+    closeDialogImg();
   };
 
-  var closeDialogImg = function () {
-    body.classList.remove('modal-open');
-    imgUploadOverlay.classList.add('hidden');
-    resizeControl.setAttribute('value', scale.default + '%');
-    imgUploadPreview.setAttribute('style', 'transform: 1');
-    sliderEffects.classList.remove('hidden');
-    setPositionPin(DEFAULT_EFFECT_VALUE);
-    imgEditable.setAttribute('class', 'effects__preview--none');
-    imgEditable.removeAttribute('style');
-
-    imgUploadCancel.removeEventListener('click', closeDialogImg);
-    document.removeEventListener('keydown', dialogImgPressEsc);
-    buttonResizeMinus.removeEventListener('click', resizeMinus);
-    buttonResizePlus.removeEventListener('click', resizePlus);
-    scalePin.removeEventListener('mousedown', scalePinMousedownHandler);
-
-    effectSliderItems.forEach(function (item) {
-      item.removeEventListener('click', makeChangeEffectHandler);
-    });
-  };
-
-  var dialogImgPressEsc = function (evt) {
+  var documentKeydownHandler = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE && evt.target !== hashtagField && evt.target !== commentField) {
       closeDialogImg();
     }
   };
 
-  var resizeMinus = function () {
-    resize = Math.max(parseInt(resizeControl.value, 10) - scale.step, scale.min);
-    resizeControl.value = resize + '%';
-    return transformImg();
+  var buttonResizeMinusClickHandler = function () {
+    window.resize.resizeMinus();
   };
 
-  var resizePlus = function () {
-    resize = Math.min(parseInt(resizeControl.value, 10) + scale.step, scale.max);
-    resizeControl.value = resize + '%';
-    return transformImg();
-  };
-
-  var transformImg = function () {
-    var transform = resize / 100;
-    imgUploadPreview.style.transform = 'scale(' + transform + ')';
-  };
-
-  var setPositionPin = function (currentPosition) {
-    if (currentPosition > 100 || currentPosition < 0) {
-      return;
-    }
-    scalePin.style.left = currentPosition + '%';
-    scaleLevel.style.width = currentPosition + '%';
-    scaleValue.value = currentPosition;
-  };
-
-  var resetEffect = function () {
-    imgUploadPreview.removeAttribute('style');
-    setPositionPin(DEFAULT_EFFECT_VALUE);
-    effectValue = document.querySelector('input[type=radio]:checked').value;
+  var buttonResizePlusClickHandler = function () {
+    window.resize.resizePlus();
   };
 
   var makeChangeEffectHandler = function () {
@@ -159,6 +100,59 @@
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
+  var openDialogImg = function () {
+    body.classList.add('modal-open');
+    imgUploadOverlay.classList.remove('hidden');
+    resizeControl.setAttribute('value', window.resize.scale.default + '%');
+
+    imgUploadCancel.addEventListener('click', imgUploadCancelClickHandler);
+    document.addEventListener('keydown', documentKeydownHandler);
+    buttonResizeMinus.addEventListener('click', buttonResizeMinusClickHandler);
+    buttonResizePlus.addEventListener('click', buttonResizePlusClickHandler);
+    scalePin.addEventListener('mousedown', scalePinMousedownHandler);
+
+    effectSliderItems.forEach(function (item) {
+      item.addEventListener('click', makeChangeEffectHandler);
+    });
+  };
+
+  var closeDialogImg = function () {
+    body.classList.remove('modal-open');
+    imgUploadOverlay.classList.add('hidden');
+    resizeControl.setAttribute('value', window.resize.scale.default + '%');
+    imgUploadPreview.setAttribute('style', 'transform: 1');
+    sliderEffects.classList.remove('hidden');
+    setPositionPin(DEFAULT_EFFECT_VALUE);
+    imgEditable.setAttribute('class', 'effects__preview--none');
+    imgEditable.removeAttribute('style');
+
+
+    imgUploadCancel.removeEventListener('click', imgUploadCancelClickHandler);
+    document.removeEventListener('keydown', documentKeydownHandler);
+    buttonResizeMinus.removeEventListener('click', buttonResizeMinusClickHandler);
+    buttonResizePlus.removeEventListener('click', buttonResizePlusClickHandler);
+    scalePin.removeEventListener('mousedown', scalePinMousedownHandler);
+
+    effectSliderItems.forEach(function (item) {
+      item.removeEventListener('click', makeChangeEffectHandler);
+    });
+  };
+
+  var setPositionPin = function (currentPosition) {
+    if (currentPosition > 100 || currentPosition < 0) {
+      return;
+    }
+    scalePin.style.left = currentPosition + '%';
+    scaleLevel.style.width = currentPosition + '%';
+    scaleValue.value = currentPosition;
+  };
+
+  var resetEffect = function () {
+    imgUploadPreview.removeAttribute('style');
+    setPositionPin(DEFAULT_EFFECT_VALUE);
+    effectValue = document.querySelector('input[type=radio]:checked').value;
+  };
+
   var changeEffectIntensity = function () {
     switch (imgEditable.getAttribute('class')) {
       case 'effects__preview--heat':
@@ -193,12 +187,16 @@
   uploadImgForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
+    hashtagField.value = '';
+    commentField.value = '';
+
     window.backend.save(closeDialogImg, window.backend.windowError, new FormData(uploadImgForm));
   });
 
 
   window.gallery = {
-    dialogImgPressEsc: dialogImgPressEsc,
+    imgUploadPreview: imgUploadPreview,
+    resizeControl: resizeControl,
     commentField: commentField,
     hashtagField: hashtagField
   };

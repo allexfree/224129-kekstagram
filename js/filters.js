@@ -15,16 +15,10 @@
       imgFilter.querySelector('.' + className).classList.remove(className);
 
       evt.target.classList.add(className);
-      drawPhotos (window.pictures.userPhotos, evt.target.id);
 
-    };
+  };
 
-  var drawPhotos = function ( photos, targetId ) {
-
-    // если вызван из load
-    if ( targetId === undefined ) {
-      window.pictures.userPhotos = photos;
-    }
+  var filterPhotos = function ( photos, targetId ) {
 
     var filteredPhotos = [];
     switch ( targetId ) {
@@ -52,26 +46,15 @@
           filteredPhotos = photos;
         break;
     }
+    return filteredPhotos;
+  }
 
-    window.pictures.listElement.querySelectorAll( 'a' ).forEach ( function (item) {
-      window.pictures.listElement.removeChild ( item );
-    });
-
-    filteredPhotos.forEach ( function ( item ) {
-      window.pictures.fragment.appendChild(window.pictures.fillBlockPicturesElements(item ));
-    })
-
-    window.pictures.listElement.appendChild(window.pictures.fragment);
-
-  };
-
-  window.backend.load(drawPhotos, window.backend.windowError);
 
   window.filters = {
     imgFilter: imgFilter,
     imgFilterForm: imgFilterForm,
     imgFilterFormClickHandler: imgFilterFormClickHandler,
-    drawPhotos: drawPhotos
+    filterPhotos: filterPhotos
   }
 
 })();

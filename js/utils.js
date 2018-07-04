@@ -2,7 +2,7 @@
 
 (function () {
 
-  var ESC_KEYCODE = 27; // gallery.js dialogImgPressEsc, pictures.js обработчик на документ
+  var ESC_KEYCODE = 27; // gallery.js documentKeydownHandler, pictures.js обработчик на документ
   var PERCENTAGES = 100; // gallery.js mouseMoveHandler
 
   /* Ф-ция getRandomMinMax получает случайное число от min до max */

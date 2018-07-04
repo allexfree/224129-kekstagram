@@ -15,11 +15,10 @@
     var currentHashtag = tags[0];
 
     for (var i = 1; i < tags.length; i++) {
-        if (tags[i].toUpperCase() === currentHashtag.toUpperCase()) {
-          msg = 'Одинаковые';
+          if (tags[i].toLowerCase() === currentHashtag.toLowerCase()) {
+            msg = 'Одинаковые хештеги';
+          }
         }
-        currentHashtag = tags[i];
-      }
 
     tags.forEach(function (item) {
 
@@ -63,7 +62,7 @@
 
   window.validation = {
     validateHashtagHandler: validateHashtagHandler,
-    validateCommentHandler: validateCommentHandler
+    validateCommentHandler: validateCommentHandler,
   };
 
 })();
