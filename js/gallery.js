@@ -76,7 +76,7 @@
     if (effectValue === effectOriginal) {
       scaleLine.classList.add('hidden');
     } else {
-        scaleLine.classList.remove('hidden');
+      scaleLine.classList.remove('hidden');
     }
     effectClassName = 'effects__preview--' + effectValue;
     imageEditable.className = '';
