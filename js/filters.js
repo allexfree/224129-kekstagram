@@ -6,6 +6,8 @@
 
   var imgFilter = document.querySelector('.img-filters');
   var imgFilterForm = imgFilter.querySelector('.img-filters__form');
+  var filterDiscused = 'filter-discussed';
+  var filterNews = 'filter-new';
 
   var imgFilterFormClickHandler = window.debounce(function (evt) {
     var className = 'img-filters__button--active';
@@ -26,13 +28,13 @@
     var filteredPhotos = [];
     switch (targetId) {
 
-      case 'filter-discussed':
+      case filterDiscused:
         filteredPhotos = photos.slice().sort(function (left, right) {
           return right.comments.length - left.comments.length;
         });
         break;
 
-      case 'filter-new':
+      case filterNews:
         filteredPhotos = [window.utils.getRandomArrayElement(photos)];
         var randomItem;
 

@@ -28,12 +28,19 @@
   var buttonResizeMinus = imageUploadOverlay.querySelector('.resize__control--minus');
   var buttonResizePlus = imageUploadOverlay.querySelector('.resize__control--plus');
   var resizeControl = imageUploadOverlay.querySelector('.resize__control--value');
-  var scaleLine = document.querySelector('.img-upload__scale');
-  var scaleValue = document.querySelector('.scale__value');
-  var scalePin = document.querySelector('.scale__pin');
-  var scaleLevel = document.querySelector('.scale__level');
-  var effectSliderItems = document.querySelectorAll('input[type=radio]');
-  var effectValue = document.querySelector('input[type=radio]:checked').value;
+  var scaleLine = imageUploadOverlay.querySelector('.img-upload__scale');
+  var scaleValue = imageUploadOverlay.querySelector('.scale__value');
+  var scalePin = imageUploadOverlay.querySelector('.scale__pin');
+  var scaleLevel = imageUploadOverlay.querySelector('.scale__level');
+  var effectSliderItems = imageUploadOverlay.querySelectorAll('input[type=radio]');
+  var effectValue = imageUploadOverlay.querySelector('input[type=radio]:checked').value;
+  var effectOriginal = 'none';
+  var effectHeat = 'effects__preview--heat';
+  var effectPhobos = 'effects__preview--phobos';
+  var effectMarvin = 'effects__preview--marvin';
+  var effectSepia = 'effects__preview--sepia';
+  var effectChrome = 'effects__preview--chrome';
+
 
   var hashtagField = imageUploadOverlay.querySelector('.text__hashtags');
   var commentField = imageUploadOverlay.querySelector('.text__description');
@@ -66,8 +73,10 @@
 
   var makeChangeEffectHandler = function () {
     resetEffect();
-    if (effectValue === 'none') {
+    if (effectValue === effectOriginal) {
       scaleLine.classList.add('hidden');
+    } else {
+        scaleLine.classList.remove('hidden');
     }
     effectClassName = 'effects__preview--' + effectValue;
     imageEditable.className = '';
@@ -104,6 +113,7 @@
   var openDialogImg = function () {
     body.classList.add('modal-open');
     imageUploadOverlay.classList.remove('hidden');
+    scaleLine.classList.add('hidden');
     resizeControl.setAttribute('value', window.resize.scale.default + '%');
 
     imageUploadCancel.addEventListener('click', imageUploadCancelClickHandler);
@@ -140,7 +150,7 @@
   };
 
   var setPositionPin = function (currentPosition) {
-    if (currentPosition > 100 || currentPosition < 0) {
+    if (currentPosition > DEFAULT_EFFECT_VALUE || currentPosition < 0) {
       return;
     }
     scalePin.style.left = currentPosition + '%';
@@ -156,19 +166,19 @@
 
   var changeEffectIntensity = function () {
     switch (imageEditable.getAttribute('class')) {
-      case 'effects__preview--heat':
+      case effectHeat:
         imageEditable.style.filter = 'brightness(' + (scaleValue.value * MAX_BRIGHTNESS / 100 + 1).toFixed(1) + ')';
         break;
-      case 'effects__preview--phobos':
+      case effectPhobos:
         imageEditable.style.filter = 'blur(' + (scaleValue.value * MAX_BLUR / 100).toFixed(1) + 'px)';
         break;
-      case 'effects__preview--marvin':
+      case effectMarvin:
         imageEditable.style.filter = 'invert(' + Math.round(scaleValue.value) + '%)';
         break;
-      case 'effects__preview--sepia':
+      case effectSepia:
         imageEditable.style.filter = 'sepia(' + (scaleValue.value / 100).toFixed(2) + ')';
         break;
-      case 'effects__preview--chrome':
+      case effectChrome:
         imageEditable.style.filter = 'grayscale(' + (scaleValue.value / 100).toFixed(2) + ')';
         break;
     }
