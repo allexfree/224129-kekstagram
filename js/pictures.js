@@ -4,6 +4,7 @@
 
   // Объявление переменных
 
+  var MINI_PICTURE_CLASS = 'picture__img';
   var SVG_QUANTITY = 6;
   var MAX_COMMENT_LENGTH = 5;
   var descriptions = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'
@@ -34,13 +35,18 @@
     });
   };
 
+  var getAvatarPath = function (index) {
+    var index = window.utils.getRandomMinMax(1, SVG_QUANTITY);
+    return `img/avatar-${index}.svg`;
+  };
+
   var renderComments = function (item) {
     var liNode = document.createElement('li');
     liNode.classList.add('social__comment', 'social__comment--text');
 
     var imageNode = document.createElement('img');
     imageNode.classList.add('social__picture');
-    imageNode.src = 'img/avatar-' + window.utils.getRandomMinMax(1, SVG_QUANTITY) + '.svg';
+    imageNode.src = getAvatarPath();
     liNode.appendChild(imageNode);
 
     var paragraphNode = document.createElement('p');
@@ -54,9 +60,12 @@
 
   /* по клику на миниатюру показывает большую фотографию */
   var renderBigPhoto = function (evt) {
+    var target = evt.target;
+    if (target.className !== MINI_PICTURE_CLASS) {
+      return;
+    }
     bigPictureCancel.addEventListener('click', closeHandler);
     showAndHideElements(blockBigPicture, visibleList);
-    var target = evt.target;
     var id = parseInt(target.src.substring(target.src.lastIndexOf('/') + 1, target.src.indexOf('.')), 10) - 1;
     var sourceitem = window.pictures.userPhotos[id];
 
@@ -88,8 +97,8 @@
 
   /* Ф-ция fillBlockPicturesElements рисует миниатюрки, т.е. выполняет заполнение блока элементами на основе массива из параметра sourceitem */
   var fillBlockPicturesElements = function (sourceitem) {
-
     var photos = photoTemplate.cloneNode(true);
+    photos.querySelector('.picture__stats').setAttribute('onclick', 'return false');
     photos.querySelector('.picture__img').src = sourceitem.url;
     photos.querySelector('.picture__stat--comments').textContent = sourceitem.comments.length;
     photos.querySelector('.picture__stat--likes').textContent = sourceitem.likes;

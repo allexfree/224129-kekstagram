@@ -2,12 +2,12 @@
 
 (function () {
 
+  var FILTER_DISCUSSED = 'filter-discussed';
+  var FILTER_NEWS = 'filter-new';
   var UNIQUE_PHOTOS_SIZE = 10;
 
   var imgFilter = document.querySelector('.img-filters');
   var imgFilterForm = imgFilter.querySelector('.img-filters__form');
-  var filterDiscused = 'filter-discussed';
-  var filterNews = 'filter-new';
 
   var imgFilterFormClickHandler = window.debounce(function (evt) {
     var className = 'img-filters__button--active';
@@ -28,13 +28,13 @@
     var filteredPhotos = [];
     switch (targetId) {
 
-      case filterDiscused:
+      case FILTER_DISCUSSED:
         filteredPhotos = photos.slice().sort(function (left, right) {
           return right.comments.length - left.comments.length;
         });
         break;
 
-      case filterNews:
+      case FILTER_NEWS:
         filteredPhotos = [window.utils.getRandomArrayElement(photos)];
         var randomItem;
 
