@@ -23,7 +23,6 @@
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var commentsMore = blockBigPicture.querySelector('.social__loadmore');
   var visibleList = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
-  //var listSocialCommentNode = document.querySelector('.social__comments');
 
 
   // Определение ф-ций
@@ -85,7 +84,7 @@
       listSocialCommentNode.removeChild(item);
     });
 
-    var commentsMoreClickHandler = function (evt) {
+    var commentsMoreClickHandler = function () {
       appendComments();
       if (sourceitem.comments.length <= listSocialCommentNode.children.length) {
         commentsMore.removeEventListener('click', commentsMoreClickHandler);
@@ -102,7 +101,7 @@
       listSocialCommentNode.appendChild(commentFragment);
     };
 
-	appendComments();
+    appendComments();
 
     if (sourceitem.comments.length > MAX_COMMENT_LENGTH) {
       commentsMore.classList.remove('visually-hidden');
