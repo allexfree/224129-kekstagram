@@ -4,6 +4,8 @@
 
   // Объявление переменных
 
+  var PATH = 'img/avatar-';
+  var EXT = '.svg';
   var MINI_PICTURE_CLASS = 'picture__img';
   var SVG_QUANTITY = 6;
   var MAX_COMMENT_LENGTH = 5;
@@ -36,10 +38,8 @@
     });
   };
 
-  var getAvatarPath = function (index) {
-    var index = window.utils.getRandomMinMax(1, SVG_QUANTITY);
-    var path = `img/avatar-${index}.svg`;
-    return path;
+  var getAvatarPath = function () {
+    return PATH + window.utils.getRandomMinMax(1, SVG_QUANTITY) + EXT;
   };
 
   var renderComments = function (item) {
