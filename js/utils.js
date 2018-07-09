@@ -2,6 +2,8 @@
 
 (function () {
 
+  var LEFT_KEYCODE = 37; // gallery.js
+  var RIGHT_KEYCODE = 39; // gallery.js
   var ESC_KEYCODE = 27; // gallery.js documentKeydownHandler, pictures.js обработчик на документ
   var PERCENTAGES = 100; // gallery.js mouseMoveHandler
 
@@ -16,6 +18,8 @@
   };
 
   window.utils = {
+    LEFT_KEYCODE: LEFT_KEYCODE,
+    RIGHT_KEYCODE: RIGHT_KEYCODE,
     ESC_KEYCODE: ESC_KEYCODE,
     PERCENTAGES: PERCENTAGES,
     getRandomMinMax: getRandomMinMax,
