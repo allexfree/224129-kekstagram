@@ -90,7 +90,7 @@
         commentsMore.removeEventListener('click', commentsMoreClickHandler);
         commentsMore.classList.add('visually-hidden');
       }
-  	};
+    };
 
     var appendComments = function () {
       var commentFragment = document.createDocumentFragment();
