@@ -83,6 +83,7 @@
     listSocialCommentNode.appendChild(commentFragment);
   };
 
+
   var photoClickHandler = function (evt) {
     renderBigPhoto(evt);
   };
