@@ -38,7 +38,6 @@
   var buttonResizePlus = imageUploadOverlay.querySelector('.resize__control--plus');
   var resizeControl = imageUploadOverlay.querySelector('.resize__control--value');
   var scaleLineBlock = imageUploadOverlay.querySelector('.img-upload__scale');
-  var scaleLine = imageUploadOverlay.querySelector('.scale__line');
   var scaleValue = imageUploadOverlay.querySelector('.scale__value');
   var scalePin = imageUploadOverlay.querySelector('.scale__pin');
   var scaleLevel = imageUploadOverlay.querySelector('.scale__level');
@@ -139,8 +138,8 @@
       } else if (evt.keyCode === window.utils.RIGHT_KEYCODE) {
         scaleValue.value = Math.min(parseInt(scaleValue.value, 10) + SCALE_STEP, SCALE_MAX);
       }
-    setPositionPin(scaleValue.value);
-    changeEffectIntensity();
+      setPositionPin(scaleValue.value);
+      changeEffectIntensity();
     }
   };
 
