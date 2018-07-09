@@ -66,6 +66,7 @@
       buttonResizeMinus.addEventListener('click', buttonResizeMinusClickHandler);
       buttonResizePlus.addEventListener('click', buttonResizePlusClickHandler);
       scalePin.addEventListener('mousedown', scalePinMousedownHandler);
+      document.addEventListener('keydown', documentKeydownLeftRightHandler);
 
       effectSliderItems.forEach(function (item) {
         item.addEventListener('click', makeChangeEffectHandler);
@@ -91,13 +92,13 @@
       var reader = new FileReader();
       reader.addEventListener('load', function () {
         imageEditable.src = reader.result;
+        effectsPreview.forEach(function (item) {
+          item.setAttribute('style', 'background-image: url(' + reader.result + ')');
+        });
       });
       reader.readAsDataURL(file);
     }
 
-    effectsPreview.forEach(function (item) {
-      item.setAttribute('style', 'background-image: ' + imageEditable.getAttribute('src') + ' !important');
-    });
   };
 
   var imageUploadCancelClickHandler = function () {
@@ -131,19 +132,17 @@
     imageEditable.removeAttribute('style');
   };
 
-  document.addEventListener('keydown', function (evt) {
+  var documentKeydownLeftRightHandler = function (evt) {
     if (evt.target === scalePin) {
-      if (evt.keyCode === 37) {
+      if (evt.keyCode === window.utils.LEFT_KEYCODE) {
         scaleValue.value = Math.max(parseInt(scaleValue.value, 10) - SCALE_STEP, SCALE_MIN);
-        console.log(scaleValue.value);
-      } else if (evt.keyCode === 39) {
+      } else if (evt.keyCode === window.utils.RIGHT_KEYCODE) {
         scaleValue.value = Math.min(parseInt(scaleValue.value, 10) + SCALE_STEP, SCALE_MAX);
       }
-    var position = Math.round(scaleValue.value * scaleLevel.offsetWidth / 100);
-    setPositionPin(position);
+    setPositionPin(scaleValue.value);
     changeEffectIntensity();
     }
-  });
+  };
 
   var scalePinMousedownHandler = function (evt) {
     evt.preventDefault();
@@ -180,6 +179,7 @@
     setPositionPin(DEFAULT_EFFECT_VALUE);
     imageEditable.setAttribute('class', 'effects__preview--none');
     imageEditable.removeAttribute('style');
+    imageUpload.value = '';
 
 
     imageUploadCancel.removeEventListener('click', imageUploadCancelClickHandler);
@@ -187,6 +187,7 @@
     buttonResizeMinus.removeEventListener('click', buttonResizeMinusClickHandler);
     buttonResizePlus.removeEventListener('click', buttonResizePlusClickHandler);
     scalePin.removeEventListener('mousedown', scalePinMousedownHandler);
+    document.removeEventListener('keydown', documentKeydownLeftRightHandler);
 
     effectSliderItems.forEach(function (item) {
       item.removeEventListener('click', makeChangeEffectHandler);

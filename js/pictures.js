@@ -19,6 +19,7 @@
   var blockBigPicture = document.querySelector('.big-picture');
   var bigPicturePreview = blockBigPicture.querySelector('.big-picture__preview');
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
+  var commentsMore = blockBigPicture.querySelector('.social__loadmore');
   var visibleList = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
 
 
@@ -43,6 +44,7 @@
   var renderComments = function (item) {
     var liNode = document.createElement('li');
     liNode.classList.add('social__comment', 'social__comment--text');
+
 
     var imageNode = document.createElement('img');
     imageNode.classList.add('social__picture');
@@ -84,11 +86,23 @@
     // add fragment
     var commentFragment = document.createDocumentFragment();
 
+
     for (var i = 0; i < MAX_COMMENT_LENGTH && i < sourceitem.comments.length; i++) {
       commentFragment.appendChild(renderComments(sourceitem.comments[i]));
     }
 
+    if (sourceitem.comments.length >= MAX_COMMENT_LENGTH) {
+      commentsMore.classList.remove('visually-hidden');
+      commentsMore.addEventListener('click', function () {
+      for (i = MAX_COMMENT_LENGTH; i < sourceitem.comments.length; i++) {
+        commentFragment.appendChild(renderComments(sourceitem.comments[i]));
+      }
+        listSocialCommentNode.appendChild(commentFragment);
+      });
+    }
+
     listSocialCommentNode.appendChild(commentFragment);
+
   };
 
   var photoClickHandler = function (evt) {
