@@ -95,9 +95,9 @@
     if (sourceitem.comments.length >= MAX_COMMENT_LENGTH) {
       commentsMore.classList.remove('visually-hidden');
       commentsMore.addEventListener('click', function () {
-      for (i = MAX_COMMENT_LENGTH; i < sourceitem.comments.length; i++) {
-        commentFragment.appendChild(renderComments(sourceitem.comments[i]));
-      }
+        for (i = MAX_COMMENT_LENGTH; i < sourceitem.comments.length; i++) {
+          commentFragment.appendChild(renderComments(sourceitem.comments[i]));
+        }
         listSocialCommentNode.appendChild(commentFragment);
       });
     }
