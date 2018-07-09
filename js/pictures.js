@@ -38,7 +38,8 @@
 
   var getAvatarPath = function (index) {
     var index = window.utils.getRandomMinMax(1, SVG_QUANTITY);
-    return `img/avatar-${index}.svg`;
+    var path = `img/avatar-${index}.svg`;
+    return path;
   };
 
   var renderComments = function (item) {
