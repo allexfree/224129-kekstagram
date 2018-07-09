@@ -2,6 +2,8 @@
 
 (function () {
 
+  var FILTER_DISCUSSED = 'filter-discussed';
+  var FILTER_NEWS = 'filter-new';
   var UNIQUE_PHOTOS_SIZE = 10;
 
   var imgFilter = document.querySelector('.img-filters');
@@ -26,13 +28,13 @@
     var filteredPhotos = [];
     switch (targetId) {
 
-      case 'filter-discussed':
+      case FILTER_DISCUSSED:
         filteredPhotos = photos.slice().sort(function (left, right) {
           return right.comments.length - left.comments.length;
         });
         break;
 
-      case 'filter-new':
+      case FILTER_NEWS:
         filteredPhotos = [window.utils.getRandomArrayElement(photos)];
         var randomItem;
 
