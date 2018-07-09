@@ -23,6 +23,7 @@
   var bigPictureCancel = blockBigPicture.querySelector('.big-picture__cancel');
   var commentsMore = blockBigPicture.querySelector('.social__loadmore');
   var visibleList = blockBigPicture.querySelectorAll('.social__comment-count, .social__loadmore');
+  //var listSocialCommentNode = document.querySelector('.social__comments');
 
 
   // Определение ф-ций
@@ -84,25 +85,29 @@
       listSocialCommentNode.removeChild(item);
     });
 
-    // add fragment
-    var commentFragment = document.createDocumentFragment();
+    var commentsMoreClickHandler = function (evt) {
+      appendComments();
+      if (sourceitem.comments.length <= listSocialCommentNode.children.length) {
+        commentsMore.removeEventListener('click', commentsMoreClickHandler);
+        commentsMore.classList.add('visually-hidden');
+      }
+  	};
 
+    var appendComments = function () {
+      var commentFragment = document.createDocumentFragment();
+      var commentsNumber = listSocialCommentNode.children.length;
+      for (var i = commentsNumber; i < (commentsNumber + MAX_COMMENT_LENGTH) && i < sourceitem.comments.length; i++) {
+        commentFragment.appendChild(renderComments(sourceitem.comments[i]));
+      }
+      listSocialCommentNode.appendChild(commentFragment);
+    };
 
-    for (var i = 0; i < MAX_COMMENT_LENGTH && i < sourceitem.comments.length; i++) {
-      commentFragment.appendChild(renderComments(sourceitem.comments[i]));
-    }
+	appendComments();
 
-    if (sourceitem.comments.length >= MAX_COMMENT_LENGTH) {
+    if (sourceitem.comments.length > MAX_COMMENT_LENGTH) {
       commentsMore.classList.remove('visually-hidden');
-      commentsMore.addEventListener('click', function () {
-        for (i = MAX_COMMENT_LENGTH; i < sourceitem.comments.length; i++) {
-          commentFragment.appendChild(renderComments(sourceitem.comments[i]));
-        }
-        listSocialCommentNode.appendChild(commentFragment);
-      });
+      commentsMore.addEventListener('click', commentsMoreClickHandler);
     }
-
-    listSocialCommentNode.appendChild(commentFragment);
 
   };
 
